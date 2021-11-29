@@ -1,0 +1,18 @@
+{
+    "enchantment.chant.agile": "机敏",
+    "enchantment.chant.regeneration": "再生",
+    "enchantment.chant.suck_blood": "生命偷取",
+    "enchantment.chant.creeper_killer": "爬行杀手",
+    "enchantment.chant.slowness": "冰矢",
+    "enchantment.chant.judge": "执法者",
+    "enchantment.chant.critical": "会心",
+    "itemGroup.attribute.item": "伶盗龙的属性模组",
+    "item.attribute.iron_netherite_sword": "镶铁合金剑",
+    "item.attribute.golden_netherite_sword": "镶金合金剑",
+    "item.attribute.diamond_netherite_sword": "镶钻合金剑",
+    "item.attribute.emerald_netherite_sword": "镶珠合金剑",
+    "block.attribute.carrot_block": "胡萝卜块",
+    "block.attribute.potato_block": "马铃薯块",
+    "attribute.judge.killTip": "曙光女神的裁决！",
+    "attribute.critical.activeTip": "你忽然感觉气转丹田，会心一击！"
+}

@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "potato",
+  "ingredients": [
+    {
+      "item": "attribute:potato_block_item"
+    }
+  ],
+  "result": {
+    "item": "minecraft:potato",
+    "count": 8
+  }
+}

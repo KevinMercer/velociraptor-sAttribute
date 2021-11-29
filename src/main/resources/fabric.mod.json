@@ -1,0 +1,38 @@
+{
+  "schemaVersion": 1,
+  "id": "velociraptor-attribute-stat",
+  "version": "${version}",
+
+  "name": "Attribute Stat",
+  "description": "Rise up your level, make you more stronger",
+  "authors": [
+    "Velociraptor"
+  ],
+  "contact": {
+    "homepage": "https://fabricmc.net/",
+    "sources": "https://github.com/FabricMC/fabric-example-mod"
+  },
+
+  "license": "CC0-1.0",
+  "icon": "assets/attribute/icon.png",
+
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+        "net.attribute.velociraptor.AttributeStat"
+    ]
+  },
+  "mixins": [
+    "velociraptor.mixins.json"
+  ],
+
+  "depends": {
+    "fabricloader": ">=0.12.2",
+    "fabric": "*",
+    "minecraft": "1.17.x",
+    "java": ">=16"
+  },
+  "suggests": {
+    "another-mod": "*"
+  }
+}

@@ -1,0 +1,6 @@
+{
+    "parent": "minecraft:item/generated",
+    "textures": {
+        "layer0": "attribute:item/drop/raw_red_iron"
+    }
+}

@@ -1,0 +1,6 @@
+{
+    "parent": "minecraft:item/handheld",
+    "textures": {
+        "layer0": "attribute:item/weapon/golden_netherite_sword"
+    }
+}

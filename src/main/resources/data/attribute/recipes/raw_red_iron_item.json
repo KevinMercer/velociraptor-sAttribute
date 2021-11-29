@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "red_iron",
+  "ingredients": [
+    {
+      "item": "attribute:raw_red_iron_block_item"
+    }
+  ],
+  "result": {
+    "item": "attribute:raw_red_iron_item",
+    "count": 9
+  }
+}
