@@ -3,11 +3,9 @@ package net.attribute.velociraptor.network;
 import net.attribute.velociraptor.AttributeStat;
 import net.attribute.velociraptor.util.LineNumberUtil;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
-import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.attribute.EntityAttributeInstance;
 import net.minecraft.entity.attribute.EntityAttributes;
 import org.apache.commons.lang3.StringUtils;
-import org.w3c.dom.Attr;
 
 /**
  * @author hwl

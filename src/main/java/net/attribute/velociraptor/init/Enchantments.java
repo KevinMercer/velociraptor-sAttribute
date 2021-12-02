@@ -1,7 +1,6 @@
 package net.attribute.velociraptor.init;
 
 import net.attribute.velociraptor.enchant.*;
-import net.minecraft.enchantment.Enchantment;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 

@@ -1,9 +1,7 @@
 package net.attribute.velociraptor.enchant;
 
 import net.attribute.velociraptor.AttributeStat;
-import net.attribute.velociraptor.network.PlayerAttributeClientPacket;
 import net.attribute.velociraptor.network.PlayerAttributeServerPacket;
-import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.client.MinecraftClient;

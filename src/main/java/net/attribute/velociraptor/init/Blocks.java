@@ -8,23 +8,15 @@ import net.attribute.velociraptor.item.block.PotatoBlockItem;
 import net.attribute.velociraptor.item.block.RawRedIronBlockItem;
 import net.attribute.velociraptor.item.ore.RedIronOreItem;
 import net.attribute.velociraptor.ore.RedIronOre;
-import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
-import net.fabricmc.fabric.api.tool.attribute.v1.FabricToolTags;
 import net.minecraft.block.MapColor;
 import net.minecraft.block.Material;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.Rarity;
-import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.registry.Registry;
-
-import java.util.LinkedList;
-import java.util.List;
-import java.util.function.Consumer;
 
 public class Blocks {
 
