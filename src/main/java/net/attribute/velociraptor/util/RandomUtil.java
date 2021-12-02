@@ -5,7 +5,7 @@ import net.attribute.velociraptor.AttributeStat;
 import java.util.Random;
 
 /**
- * @author HeWuLong
+ * @author warren
  */
 public class RandomUtil {
     public static boolean getRandomNumber(int level, int weight) {

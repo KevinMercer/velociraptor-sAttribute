@@ -14,5 +14,10 @@
     "block.attribute.carrot_block": "胡萝卜块",
     "block.attribute.potato_block": "马铃薯块",
     "attribute.judge.killTip": "曙光女神的裁决！",
-    "attribute.critical.activeTip": "你忽然感觉气转丹田，会心一击！"
+    "attribute.critical.activeTip": "你忽然感觉气转丹田，会心一击！",
+    "item.attribute.red_iron_ore": "赤金矿石",
+    "item.attribute.raw_red_iron_block_item": "赤金块",
+    "block.attribute.red_iron_ore": "赤金矿石",
+    "block.attribute.raw_red_iron_block": "赤金块",
+    "item.attribute.raw_red_iron_item": "粗赤金"
 }

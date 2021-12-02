@@ -4,7 +4,7 @@ import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.util.Rarity;
 
 /**
- * @author HeWuLong
+ * @author warren
  */
 public class FabricSettingFactory {
 

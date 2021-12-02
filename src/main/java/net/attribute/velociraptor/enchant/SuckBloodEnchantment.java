@@ -11,7 +11,7 @@ import net.minecraft.entity.damage.DamageTracker;
 import net.minecraft.item.ItemStack;
 
 /**
- * @author HeWuLong
+ * @author warren
  */
 public class SuckBloodEnchantment extends Enchantment {
     public SuckBloodEnchantment() {
