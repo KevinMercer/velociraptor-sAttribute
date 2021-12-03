@@ -2,8 +2,11 @@ package net.attribute.velociraptor.item.materials;
 
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.ArmorMaterial;
+import net.minecraft.item.ItemConvertible;
+import net.minecraft.item.Items;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.sound.SoundEvent;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.Lazy;
 
 /**
@@ -14,7 +17,11 @@ import net.minecraft.util.Lazy;
  * @updateAuthor
  * @describe
  */
-public enum Materials implements ArmorMaterial {
+public enum NetheriteMaterials implements ArmorMaterial {
+    IRON_NETHERITE("iron_netherite", 47, new int[]{4, 8, 10, 5}, 15, SoundEvents.ITEM_ARMOR_EQUIP_IRON, 3.0F, 0.3F),
+    GOLDEN_NETHERITE("golden_netherite", 37, new int[]{3, 6, 8, 3}, 35, SoundEvents.ITEM_ARMOR_EQUIP_GOLD, 3.0F, 0.1F),
+    DIAMOND_NETHERITE("diamond_netherite", 47, new int[]{3, 6, 9, 4}, 15, SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 6.0F, 0.1F),
+    EMERALD_NETHERITE("emerald_netherite", 70, new int[]{3, 6, 8, 3}, 15, SoundEvents.ITEM_ARMOR_EQUIP_NETHERITE, 3.0F, 0.1F)
     ;
 
     private static final int[] BASE_DURABILITY = new int[]{13, 15, 16, 11};
@@ -26,7 +33,7 @@ public enum Materials implements ArmorMaterial {
     private final float toughness;
     private final float knockBackResistance;
 
-    Materials(String name, int durabilityMultiplier, int[] protectionAmounts, int enchantAbility, SoundEvent equipSound, float toughness, float knockBackResistance) {
+    NetheriteMaterials(String name, int durabilityMultiplier, int[] protectionAmounts, int enchantAbility, SoundEvent equipSound, float toughness, float knockBackResistance) {
         this.name = name;
         this.durabilityMultiplier = durabilityMultiplier;
         this.protectionAmounts = protectionAmounts;
@@ -53,7 +60,7 @@ public enum Materials implements ArmorMaterial {
     }
 
     public Ingredient getRepairIngredient() {
-        return null;
+        return Ingredient.ofItems(Items.NETHERITE_INGOT);
     }
 
     public String getName() {

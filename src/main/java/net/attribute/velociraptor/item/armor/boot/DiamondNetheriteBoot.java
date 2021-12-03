@@ -1,12 +1,8 @@
 package net.attribute.velociraptor.item.armor.boot;
 
-import com.google.common.collect.Multimap;
+import net.attribute.velociraptor.item.materials.NetheriteMaterials;
 import net.minecraft.entity.EquipmentSlot;
-import net.minecraft.entity.attribute.EntityAttribute;
-import net.minecraft.entity.attribute.EntityAttributeModifier;
-import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.item.ArmorItem;
-import net.minecraft.item.ArmorMaterials;
 
 /**
  * @author hwl
@@ -19,6 +15,6 @@ import net.minecraft.item.ArmorMaterials;
 
 public class DiamondNetheriteBoot extends ArmorItem {
     public DiamondNetheriteBoot(Settings settings) {
-        super(ArmorMaterials.NETHERITE, EquipmentSlot.FEET, settings);
+        super(NetheriteMaterials.DIAMOND_NETHERITE, EquipmentSlot.FEET, settings);
     }
 }
