@@ -12,7 +12,7 @@ import net.minecraft.util.Identifier;
 import org.apache.commons.lang3.StringUtils;
 
 /**
- * @author hwl
+ * @author warren
  * @function
  * @createDate 2021/12/1 17:30
  * @updateDate 2021/12/1 17:30
@@ -21,8 +21,8 @@ import org.apache.commons.lang3.StringUtils;
  */
 public class PlayerAttributeServerPacket {
 
-    public static final Identifier VELOCIRAPTOR_ATTR_LEVEL_INSTANCE = new Identifier("attribute", "velociraptor_attr_level_instance");
-    public static final Identifier VELOCIRAPTOR_ATTR_EXPERIENCE_INSTANCE = new Identifier("attribute", "velociraptor_attr_experience_instance");
+    public static final Identifier VELOCIRAPTOR_ATTR_LEVEL_INSTANCE = new Identifier("velociraptors", "velociraptor_attr_level_instance");
+    public static final Identifier VELOCIRAPTOR_ATTR_EXPERIENCE_INSTANCE = new Identifier("velociraptors", "velociraptor_attr_experience_instance");
 
     public static void initialize() {
         AttributeStat.LOGGER.info("Player attribute server packet initialize success!");

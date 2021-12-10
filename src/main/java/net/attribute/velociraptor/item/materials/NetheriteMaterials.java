@@ -2,12 +2,10 @@ package net.attribute.velociraptor.item.materials;
 
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.ArmorMaterial;
-import net.minecraft.item.ItemConvertible;
 import net.minecraft.item.Items;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
-import net.minecraft.util.Lazy;
 
 /**
  * @author warren
@@ -43,34 +41,42 @@ public enum NetheriteMaterials implements ArmorMaterial {
         this.knockBackResistance = knockBackResistance;
     }
 
+    @Override
     public int getDurability(EquipmentSlot slot) {
         return BASE_DURABILITY[slot.getEntitySlotId()] * this.durabilityMultiplier;
     }
 
+    @Override
     public int getProtectionAmount(EquipmentSlot slot) {
         return this.protectionAmounts[slot.getEntitySlotId()];
     }
 
+    @Override
     public int getEnchantability() {
         return this.enchantAbility;
     }
 
+    @Override
     public SoundEvent getEquipSound() {
         return this.equipSound;
     }
 
+    @Override
     public Ingredient getRepairIngredient() {
         return Ingredient.ofItems(Items.NETHERITE_INGOT);
     }
 
+    @Override
     public String getName() {
         return this.name;
     }
 
+    @Override
     public float getToughness() {
         return this.toughness;
     }
 
+    @Override
     public float getKnockbackResistance() {
         return this.knockBackResistance;
     }

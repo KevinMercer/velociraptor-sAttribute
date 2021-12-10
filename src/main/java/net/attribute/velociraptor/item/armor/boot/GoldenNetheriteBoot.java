@@ -13,8 +13,8 @@ import net.minecraft.item.ArmorItem;
  * @describe
  */
 
-public class DiamondNetheriteBoot extends ArmorItem {
-    public DiamondNetheriteBoot(Settings settings) {
-        super(NetheriteMaterials.DIAMOND_NETHERITE, EquipmentSlot.FEET, settings);
+public class GoldenNetheriteBoot extends ArmorItem {
+    public GoldenNetheriteBoot(Settings settings) {
+        super(NetheriteMaterials.GOLDEN_NETHERITE, EquipmentSlot.FEET, settings);
     }
 }
