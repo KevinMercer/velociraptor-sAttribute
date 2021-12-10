@@ -33,7 +33,7 @@ public class ConstantString {
     public static final String POTATO_BLOCK_ITEM = "potato_block_item";
     public static final String RED_IRON_ORE_ITEM = "red_iron_ore_item";
     public static final String RAW_RED_IRON_BLOCK_ITEM = "raw_red_iron_block_item";
-    public static final String RAW_RED_IRON_ITEM = "rao_red_iron_item";
+    public static final String RAW_RED_IRON_ITEM = "raw_red_iron_item";
     public static final String DIAMOND_NETHERITE = "diamond_netherite";
     public static final String EMERALD_NETHERITE = "emerald_netherite";
     public static final String GOLDEN_NETHERITE = "golden_netherite";
