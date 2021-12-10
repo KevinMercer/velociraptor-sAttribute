@@ -8,4 +8,6 @@ public class RedIronOre extends Block {
         super(settings);
     }
 
+
+
 }

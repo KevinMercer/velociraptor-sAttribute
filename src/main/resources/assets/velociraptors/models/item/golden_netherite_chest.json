@@ -1,0 +1,6 @@
+{
+    "parent": "item/generated",
+    "textures": {
+        "layer0": "velociraptors:item/armor/chest/golden_netherite_chest"
+    }
+}

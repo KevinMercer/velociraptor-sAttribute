@@ -4,7 +4,7 @@ import net.minecraft.block.Block;
 import net.minecraft.world.explosion.Explosion;
 
 /**
- * @author HeWuLong
+ * @author warren
  */
 public class CarrotBlock extends Block {
 

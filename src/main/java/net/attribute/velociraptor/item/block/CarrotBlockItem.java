@@ -4,7 +4,7 @@ import net.minecraft.block.Block;
 import net.minecraft.item.BlockItem;
 
 /**
- * @author HeWuLong
+ * @author warren
  */
 public class CarrotBlockItem extends BlockItem {
 

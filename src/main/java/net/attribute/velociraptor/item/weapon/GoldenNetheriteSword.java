@@ -4,7 +4,7 @@ import net.minecraft.item.SwordItem;
 import net.minecraft.item.ToolMaterials;
 
 /**
- * @author HeWuLong
+ * @author warren
  */
 public class GoldenNetheriteSword extends SwordItem {
 
