@@ -1,6 +1,6 @@
 package net.attribute.velociraptor.network;
 
-import net.attribute.velociraptor.AttributeStat;
+import net.attribute.velociraptor.Velociraptors;
 import net.attribute.velociraptor.util.LineNumberUtil;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.minecraft.entity.attribute.EntityAttributeInstance;
@@ -18,26 +18,26 @@ import org.apache.commons.lang3.StringUtils;
 public class PlayerAttributeClientPacket {
 
     public static void initialize() {
-        AttributeStat.LOGGER.info("Initialize player attribute client packet success!");
+        Velociraptors.LOGGER.info("Initialize player attribute client packet success!");
         ClientPlayNetworking.registerGlobalReceiver(PlayerAttributeServerPacket.VELOCIRAPTOR_ATTR_EXPERIENCE_INSTANCE, (client, handler, buf, responseSender) -> {
-            AttributeStat.LOGGER.info("register global receiver success");
-            AttributeStat.LOGGER.info("Level instance executed!");
+            Velociraptors.LOGGER.info("register global receiver success");
+            Velociraptors.LOGGER.info("Level instance executed!");
             if (buf == null) {
-                AttributeStat.LOGGER.warn("No buf send in this packet! {}", LineNumberUtil.exceptionThrowLineNumber());
+                Velociraptors.LOGGER.warn("No buf send in this packet! {}", LineNumberUtil.exceptionThrowLineNumber());
             } else {
                 int value = buf.readInt();
                 String topic = buf.readString();
                 if (client.player == null) {
-                    AttributeStat.LOGGER.error("Player is null");
+                    Velociraptors.LOGGER.error("Player is null");
                 } else {
-                    AttributeStat.LOGGER.info("Set player health success");
+                    Velociraptors.LOGGER.info("Set player health success");
                     EntityAttributeInstance playerAttributeInstance = client.player.getAttributeInstance(EntityAttributes.GENERIC_MAX_HEALTH);
                     if (playerAttributeInstance == null) {
-                        AttributeStat.LOGGER.error("No player attribute in this instance! {}", LineNumberUtil.exceptionThrowLineNumber());
+                        Velociraptors.LOGGER.error("No player attribute in this instance! {}", LineNumberUtil.exceptionThrowLineNumber());
                     } else {
                         if (StringUtils.equals(topic, "health")) {
                             double maxHealth = playerAttributeInstance.getBaseValue() + value;
-                            AttributeStat.LOGGER.info("client max health = {}", maxHealth);
+                            Velociraptors.LOGGER.info("client max health = {}", maxHealth);
                             playerAttributeInstance.setBaseValue(maxHealth);
                         }
                     }

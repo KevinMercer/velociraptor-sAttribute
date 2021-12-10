@@ -1,6 +1,6 @@
 package net.attribute.velociraptor.enchant;
 
-import net.attribute.velociraptor.AttributeStat;
+import net.attribute.velociraptor.Velociraptors;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentTarget;
 import net.minecraft.entity.Entity;
@@ -65,7 +65,7 @@ public class SuckBloodEnchantment extends Enchantment {
             } else {
                 recoverHealth += 20 * level * 0.2F;
             }
-            AttributeStat.LOGGER.info("回复生命值：{}", recoverHealth);
+            Velociraptors.LOGGER.info("回复生命值：{}", recoverHealth);
             user.setHealth(recoverHealth);
         }
         super.onTargetDamaged(user, target, level);

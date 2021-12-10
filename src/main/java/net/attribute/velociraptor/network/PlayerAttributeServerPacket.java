@@ -1,6 +1,6 @@
 package net.attribute.velociraptor.network;
 
-import net.attribute.velociraptor.AttributeStat;
+import net.attribute.velociraptor.Velociraptors;
 import net.attribute.velociraptor.util.LineNumberUtil;
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
@@ -25,26 +25,26 @@ public class PlayerAttributeServerPacket {
     public static final Identifier VELOCIRAPTOR_ATTR_EXPERIENCE_INSTANCE = new Identifier("velociraptors", "velociraptor_attr_experience_instance");
 
     public static void initialize() {
-        AttributeStat.LOGGER.info("Player attribute server packet initialize success!");
+        Velociraptors.LOGGER.info("Player attribute server packet initialize success!");
         ServerPlayNetworking.registerGlobalReceiver(VELOCIRAPTOR_ATTR_LEVEL_INSTANCE, (server, player, handler, buf, responseSender) -> {
             if (server == null) {
-                AttributeStat.LOGGER.error("No server in this instance！ {}", LineNumberUtil.exceptionThrowLineNumber());
+                Velociraptors.LOGGER.error("No server in this instance！ {}", LineNumberUtil.exceptionThrowLineNumber());
             } else {
                 if (player == null) {
-                    AttributeStat.LOGGER.error("Player is null! {}", LineNumberUtil.exceptionThrowLineNumber());
+                    Velociraptors.LOGGER.error("Player is null! {}", LineNumberUtil.exceptionThrowLineNumber());
                 } else {
                     String topic = buf.readString();
                     int value = buf.readInt();
-                    AttributeStat.LOGGER.info("Player attribute server packet initialize success, uuid = {},  name = {}", player.getUuidAsString(), player.getName().getString());
-                    AttributeStat.LOGGER.info("topic is {}, and the value is {}", topic, value);
+                    Velociraptors.LOGGER.info("Player attribute server packet initialize success, uuid = {},  name = {}", player.getUuidAsString(), player.getName().getString());
+                    Velociraptors.LOGGER.info("topic is {}, and the value is {}", topic, value);
                     if (server.isSingleplayer()) {
                         EntityAttributeInstance playerAttribute = player.getAttributeInstance(EntityAttributes.GENERIC_MAX_HEALTH);
                         if (playerAttribute == null) {
-                            AttributeStat.LOGGER.error("No player attribute in this instance! {}", LineNumberUtil.exceptionThrowLineNumber());
+                            Velociraptors.LOGGER.error("No player attribute in this instance! {}", LineNumberUtil.exceptionThrowLineNumber());
                         } else {
                             if (StringUtils.equals("health", topic)) {
                                 double maxHealth = playerAttribute.getBaseValue() + value;
-                                AttributeStat.LOGGER.info("server max health = {}", maxHealth);
+                                Velociraptors.LOGGER.info("server max health = {}", maxHealth);
                                 playerAttribute.setBaseValue(maxHealth);
                             }
                         }
@@ -54,7 +54,7 @@ public class PlayerAttributeServerPacket {
                         CustomPayloadS2CPacket customPayloadS2CPacket = new CustomPayloadS2CPacket(PlayerAttributeServerPacket.VELOCIRAPTOR_ATTR_EXPERIENCE_INSTANCE, packetByteBuf);
                         player.networkHandler.sendPacket(customPayloadS2CPacket);
                     } else {
-                        AttributeStat.LOGGER.info("Now playing in multi player mode!");
+                        Velociraptors.LOGGER.info("Now playing in multi player mode!");
                     }
                 }
             }

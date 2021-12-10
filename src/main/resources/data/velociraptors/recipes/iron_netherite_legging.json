@@ -4,7 +4,7 @@
         "item": "minecraft:netherite_leggings"
     },
     "addition": {
-        "item": "minecraft:iron"
+        "item": "minecraft:iron_block"
     },
     "result": {
         "item": "velociraptors:iron_netherite_legging"

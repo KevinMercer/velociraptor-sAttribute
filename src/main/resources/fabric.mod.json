@@ -16,7 +16,7 @@
     "environment": "*",
     "entrypoints": {
         "main": [
-            "net.attribute.velociraptor.AttributeStat"
+            "net.attribute.velociraptor.Velociraptors"
         ]
     },
     "mixins": [

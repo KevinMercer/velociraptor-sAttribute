@@ -43,6 +43,7 @@ public class ConstantString {
     public static final String HELMET = "helmet";
     public static final String LEGGING = "legging";
     public static final String SWORD = "sword";
+    public static final String OVER_WORLD_RED_IRON_ORE = "over_world_red_iron_ore";
     /**
      * common
      */
