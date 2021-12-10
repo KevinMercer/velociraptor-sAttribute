@@ -1,0 +1,13 @@
+{
+    "parent": "block/cube",
+    "textures": {
+        "particle": "velociraptors:block/carrot_block/carrot_block_up",
+        "north": "velociraptors:block/carrot_block/carrot_block_side",
+        "south": "velociraptors:block/carrot_block/carrot_block_side",
+        "east": "velociraptors:block/carrot_block/carrot_block_side",
+        "west": "velociraptors:block/carrot_block/carrot_block_side",
+        "up": "velociraptors:block/carrot_block/carrot_block_up",
+        "down": "velociraptors:block/carrot_block/carrot_block_bottom"
+    }
+}
+

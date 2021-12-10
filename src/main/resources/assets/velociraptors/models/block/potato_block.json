@@ -1,0 +1,12 @@
+{
+    "parent": "block/cube",
+    "textures": {
+        "particle": "velociraptors:block/potato_block/potato_block_side",
+        "north": "velociraptors:block/potato_block/potato_block_side",
+        "south": "velociraptors:block/potato_block/potato_block_side",
+        "east": "velociraptors:block/potato_block/potato_block_side",
+        "west": "velociraptors:block/potato_block/potato_block_side",
+        "up": "velociraptors:block/potato_block/potato_block_up",
+        "down": "velociraptors:block/potato_block/potato_block_bottom"
+    }
+}

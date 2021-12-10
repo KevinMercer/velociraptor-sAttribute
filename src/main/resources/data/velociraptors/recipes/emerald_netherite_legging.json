@@ -1,0 +1,12 @@
+{
+    "type": "minecraft:smithing",
+    "base": {
+        "item": "minecraft:netherite_leggings"
+    },
+    "addition": {
+        "item": "minecraft:emerald_block"
+    },
+    "result": {
+        "item": "velociraptors:emerald_netherite_legging"
+    }
+}

@@ -1,11 +1,11 @@
 package net.attribute.velociraptor.util;
 
-import net.attribute.velociraptor.AttributeStat;
+import net.attribute.velociraptor.Velociraptors;
 
 import java.util.Random;
 
 /**
- * @author HeWuLong
+ * @author warren
  */
 public class RandomUtil {
     public static boolean getRandomNumber(int level, int weight) {
@@ -14,7 +14,7 @@ public class RandomUtil {
         }
         Random random = new Random();
         int number = random.nextInt(weight);
-        AttributeStat.LOGGER.info("本次随机数为：{}", number);
+        Velociraptors.LOGGER.info("本次随机数为：{}", number);
         return number < level;
     }
 }

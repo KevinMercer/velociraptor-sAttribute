@@ -12,7 +12,7 @@ import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.item.ItemStack;
 
 /**
- * @author HeWuLong
+ * @author warren
  */
 public class RegenerationEnchantment extends Enchantment {
 

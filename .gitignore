@@ -25,13 +25,14 @@
 /dist/
 /nbdist/
 /.nb-gradle/
-
+remappedSrc
 # gradle
 
 .gradle/
 build/
 out/
 classes/
+output
 
 # eclipse
 

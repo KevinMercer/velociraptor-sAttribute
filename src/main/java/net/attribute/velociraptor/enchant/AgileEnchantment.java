@@ -10,7 +10,7 @@ import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.item.ItemStack;
 
 /**
- * @author HeWuLong
+ * @author warren
  */
 public class AgileEnchantment extends Enchantment {
     public AgileEnchantment() {
