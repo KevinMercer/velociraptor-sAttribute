@@ -1,9 +1,0 @@
-{
-  "type": "minecraft:smoking",
-  "ingredient": {
-    "item": "attribute:raw_red_iron_item"
-  },
-  "result": "minecraft:copper_ingot",
-  "experience": 0.9,
-  "cookingtime": 100
-}

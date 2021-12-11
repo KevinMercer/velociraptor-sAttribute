@@ -1,9 +1,0 @@
-{
-  "type": "minecraft:blasting",
-  "ingredient": {
-    "item": "attribute:raw_red_iron_item"
-  },
-  "result": "minecraft:gold_ingot",
-  "experience": 0.3,
-  "cookingtime": 100
-}
