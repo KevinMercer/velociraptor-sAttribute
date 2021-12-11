@@ -1,7 +1,0 @@
-{
-    "parent": "minecraft:block/cube_all",
-    "textures": {
-        "all": "attribute:block/cube/raw_red_iron_block"
-    }
-}
-

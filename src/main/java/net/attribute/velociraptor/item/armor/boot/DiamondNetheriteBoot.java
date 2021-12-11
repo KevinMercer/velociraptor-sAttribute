@@ -5,7 +5,7 @@ import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.ArmorItem;
 
 /**
- * @author hwl
+ * @author warren
  * @function
  * @createDate 2021/12/3 9:38
  * @updateDate 2021/12/3 9:38

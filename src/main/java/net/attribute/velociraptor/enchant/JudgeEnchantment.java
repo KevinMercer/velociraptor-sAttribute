@@ -1,6 +1,6 @@
 package net.attribute.velociraptor.enchant;
 
-import net.attribute.velociraptor.AttributeStat;
+import net.attribute.velociraptor.Velociraptors;
 import net.attribute.velociraptor.network.PlayerAttributeServerPacket;
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
@@ -60,27 +60,27 @@ public class JudgeEnchantment extends Enchantment {
                 CustomPayloadC2SPacket customPayloadC2SPacket = new CustomPayloadC2SPacket(PlayerAttributeServerPacket.VELOCIRAPTOR_ATTR_LEVEL_INSTANCE, packetByteBuf);
                 ClientPlayNetworkHandler clientPlayNetworkHandler = minecraftClient.getNetworkHandler();
                 if (clientPlayNetworkHandler == null) {
-                    AttributeStat.LOGGER.error("No network handler in this instance!");
+                    Velociraptors.LOGGER.error("No network handler in this instance!");
                 } else {
                     clientPlayNetworkHandler.sendPacket(customPayloadC2SPacket);
                 }
                 if (minecraftClientServer != null && minecraftClientServer.isSingleplayer()) {
-                    AttributeStat.LOGGER.info("Player name is {}", minecraftClientServer.getSinglePlayerName());
-                    AttributeStat.LOGGER.info("Player uuid is {}", minecraftClient.player.getUuidAsString());
-                    AttributeStat.LOGGER.info("Player number = {}", minecraftClientServer.getPlayerManager().getCurrentPlayerCount());
+                    Velociraptors.LOGGER.info("Player name is {}", minecraftClientServer.getSinglePlayerName());
+                    Velociraptors.LOGGER.info("Player uuid is {}", minecraftClient.player.getUuidAsString());
+                    Velociraptors.LOGGER.info("Player number = {}", minecraftClientServer.getPlayerManager().getCurrentPlayerCount());
                     ServerPlayerEntity serverPlayerEntity = minecraftClientServer.getPlayerManager().getPlayer(minecraftClient.player.getUuidAsString());
                     PlayerEntity player = minecraftClient.player;
                     if (serverPlayerEntity == null) {
-                        AttributeStat.LOGGER.error("No server player in this instance!");
+                        Velociraptors.LOGGER.error("No server player in this instance!");
                     } else {
                         ServerPlayNetworking.send(serverPlayerEntity, PlayerAttributeServerPacket.VELOCIRAPTOR_ATTR_EXPERIENCE_INSTANCE, packetByteBuf);
                         ServerPlayNetworking.send(serverPlayerEntity, PlayerAttributeServerPacket.VELOCIRAPTOR_ATTR_LEVEL_INSTANCE, packetByteBuf);
                     }
                 } else {
-                    AttributeStat.LOGGER.error("No server in this instance!");
+                    Velociraptors.LOGGER.error("No server in this instance!");
                 }
             } else {
-                AttributeStat.LOGGER.error("You just can't create a client player entity");
+                Velociraptors.LOGGER.error("You just can't create a client player entity");
             }
             return 3 + 3 * level;
         }
