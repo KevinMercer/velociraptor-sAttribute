@@ -14,5 +14,10 @@
     "block.attribute.carrot_block": "胡蘿蔔塊",
     "block.attribute.potato_block": "馬鈴薯塊",
     "attribute.judge.killTip": "斬滅暴徒！",
-    "attribute.critical.activeTip": "箭似流星，恰中要害！"
+    "attribute.critical.activeTip": "箭似流星，恰中要害！",
+    "item.attribute.red_iron_ore": "赤鐵原礦石",
+    "item.attribute.raw_red_iron_block_item": "赤鐵原礦方塊",
+    "block.attribute.red_iron_ore": "赤鐵原礦石",
+    "block.attribute.raw_red_iron_block": "赤鐵原礦方塊",
+    "item.attribute.raw_red_iron_item": "赤鐵原礦"
 }

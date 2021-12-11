@@ -14,5 +14,10 @@
     "block.attribute.carrot_block": "一筐胡蘿蔔",
     "block.attribute.potato_block": "一筐馬鈴薯",
     "attribute.judge.killTip": "對唔住，我係差人！",
-    "attribute.critical.activeTip": "運氣不錯，暴擊了！"
+    "attribute.critical.activeTip": "運氣不錯，暴擊了！",
+    "item.attribute.red_iron_ore": "硃砂鐵原礦石",
+    "item.attribute.raw_red_iron_block_item": "硃砂鐵原礦方塊",
+    "block.attribute.red_iron_ore": "硃砂鐵原礦石",
+    "block.attribute.raw_red_iron_block": "硃砂鐵原礦方塊",
+    "item.attribute.raw_red_iron_item": "硃砂鐵原礦"
 }

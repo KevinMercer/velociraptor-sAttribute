@@ -1,0 +1,7 @@
+{
+    "parent": "minecraft:block/cube_all",
+    "textures": {
+        "all": "velociraptors:block/cube/raw_red_iron_block"
+    }
+}
+

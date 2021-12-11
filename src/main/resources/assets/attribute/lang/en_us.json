@@ -14,5 +14,10 @@
     "block.attribute.carrot_block": "carrot block",
     "block.attribute.potato_block": "potato block",
     "attribute.judge.killTip": "The illegal should always been judged!",
-    "attribute.critical.activeTip": "headshot, you did it!"
+    "attribute.critical.activeTip": "headshot, you did it!",
+    "item.attribute.red_iron_ore": "red iron ore",
+    "item.attribute.raw_red_iron_block_item": "raw red iron block",
+    "block.attribute.red_iron_ore": "red iron ore",
+    "block.attribute.raw_red_iron_block": "raw red iron block",
+    "item.attribute.raw_red_iron_item": "raw red iron"
 }

@@ -1,0 +1,6 @@
+{
+    "parent": "minecraft:item/handheld",
+    "textures": {
+        "layer0": "velociraptors:item/weapon/iron_netherite_sword"
+    }
+}

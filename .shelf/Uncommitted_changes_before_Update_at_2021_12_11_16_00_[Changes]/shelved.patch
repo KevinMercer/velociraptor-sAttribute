@@ -1,0 +1,1639 @@
+Index: src/main/resources/velociraptor.mixins.json
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>{\r\n  \"required\": true,\r\n  \"minVersion\": \"0.8\",\r\n  \"package\": \"net.attribute.velociraptor.mixin\",\r\n  \"compatibilityLevel\": \"JAVA_16\",\r\n  \"mixins\": [\r\n  ],\r\n  \"client\": [\r\n    \"AttributeMixin\"\r\n  ],\r\n  \"injectors\": {\r\n    \"defaultRequire\": 1\r\n  }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/resources/velociraptor.mixins.json b/src/main/resources/velociraptor.mixins.json
+--- a/src/main/resources/velociraptor.mixins.json	(revision 3097d617362fb110c763711b0ef0c81f6bfda34c)
++++ b/src/main/resources/velociraptor.mixins.json	(date 1639206737185)
+@@ -1,14 +1,14 @@
+ {
+-  "required": true,
+-  "minVersion": "0.8",
+-  "package": "net.attribute.velociraptor.mixin",
+-  "compatibilityLevel": "JAVA_16",
+-  "mixins": [
+-  ],
+-  "client": [
+-    "AttributeMixin"
+-  ],
+-  "injectors": {
+-    "defaultRequire": 1
+-  }
++    "required": true,
++    "minVersion": "0.8",
++    "package": "net.attribute.velociraptor.mixin",
++    "compatibilityLevel": "JAVA_17",
++    "mixins": [
++    ],
++    "client": [
++        "AttributeMixin"
++    ],
++    "injectors": {
++        "defaultRequire": 1
++    }
+ }
+Index: src/main/java/net/attribute/velociraptor/AttributeStat.java
+===================================================================
+diff --git a/src/main/java/net/attribute/velociraptor/AttributeStat.java b/src/main/java/net/attribute/velociraptor/AttributeStat.java
+deleted file mode 100644
+--- a/src/main/java/net/attribute/velociraptor/AttributeStat.java	(revision 3097d617362fb110c763711b0ef0c81f6bfda34c)
++++ /dev/null	(revision 3097d617362fb110c763711b0ef0c81f6bfda34c)
+@@ -1,36 +0,0 @@
+-package net.attribute.velociraptor;
+-
+-import net.attribute.velociraptor.init.Blocks;
+-import net.attribute.velociraptor.init.Enchantments;
+-import net.attribute.velociraptor.init.Items;
+-import net.attribute.velociraptor.network.PlayerAttributeClientPacket;
+-import net.attribute.velociraptor.network.PlayerAttributeServerPacket;
+-import net.fabricmc.api.ModInitializer;
+-import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
+-import net.minecraft.util.Identifier;
+-import org.apache.logging.log4j.LogManager;
+-import org.apache.logging.log4j.Logger;
+-
+-public class AttributeStat implements ModInitializer {
+-	// This logger is used to write text to the console and the log file.
+-	// It is considered best practice to use your mod id as the logger's name.
+-	// That way, it's clear which mod wrote info, warnings, and errors.
+-	public static final Logger LOGGER = LogManager.getLogger("velociraptor-attribute-stat");
+-
+-	@Override
+-	public void onInitialize() {
+-		// This code runs as soon as Minecraft is in a mod-load-ready state.
+-		// However, some things (like resources) may still be uninitialized.
+-		// Proceed with mild caution.
+-		AttributeStat.LOGGER.info("fabric on initialize!");
+-		Items.initialize();
+-		Enchantments.initialize();
+-		Blocks.initialize();
+-		PlayerAttributeServerPacket.initialize();
+-		PlayerAttributeClientPacket.initialize();
+-		if (Items.ITEM_STACK_VECTOR.size() > 0) {
+-			FabricItemGroupBuilder.create(new Identifier("attribute", "item")).icon(() -> Items.ITEM_STACK_VECTOR.get(0)).appendItems(items -> items.addAll(Items.ITEM_STACK_VECTOR)).build();
+-		}
+-		AttributeStat.LOGGER.info("Player attribute server packet initialize over!");
+-	}
+-}
+Index: src/main/resources/assets/attribute/lang/zh_hk.json
+===================================================================
+diff --git a/src/main/resources/assets/attribute/lang/zh_hk.json b/src/main/resources/assets/attribute/lang/zh_hk.json
+deleted file mode 100644
+--- a/src/main/resources/assets/attribute/lang/zh_hk.json	(revision 3097d617362fb110c763711b0ef0c81f6bfda34c)
++++ /dev/null	(revision 3097d617362fb110c763711b0ef0c81f6bfda34c)
+@@ -1,23 +0,0 @@
+-{
+-    "enchantment.chant.agile": "機敏",
+-    "enchantment.chant.regeneration": "恢復",
+-    "enchantment.chant.suck_blood": "食血",
+-    "enchantment.chant.creeper_killer": "creeper 杀手",
+-    "enchantment.chant.slowness": "冰箭頭",
+-    "enchantment.chant.judge": "罪罰",
+-    "enchantment.chant.critical": "暴擊",
+-    "itemGroup.attribute.item": "velociraptor 嘅煉體 mod",
+-    "item.attribute.iron_netherite_sword": "淬鉄合金劍",
+-    "item.attribute.golden_netherite_sword": "煉金合金劍",
+-    "item.attribute.diamond_netherite_sword": "帶鑽合金劍",
+-    "item.attribute.emerald_netherite_sword": "寶石合金劍",
+-    "block.attribute.carrot_block": "一筐胡蘿蔔",
+-    "block.attribute.potato_block": "一筐馬鈴薯",
+-    "attribute.judge.killTip": "對唔住，我係差人！",
+-    "attribute.critical.activeTip": "運氣不錯，暴擊了！",
+-    "item.attribute.red_iron_ore": "硃砂鐵原礦石",
+-    "item.attribute.raw_red_iron_block_item": "硃砂鐵原礦方塊",
+-    "block.attribute.red_iron_ore": "硃砂鐵原礦石",
+-    "block.attribute.raw_red_iron_block": "硃砂鐵原礦方塊",
+-    "item.attribute.raw_red_iron_item": "硃砂鐵原礦"
+-}
+\ No newline at end of file
+Index: src/main/resources/assets/attribute/models/block/carrot_block.json
+===================================================================
+diff --git a/src/main/resources/assets/attribute/models/block/carrot_block.json b/src/main/resources/assets/attribute/models/block/carrot_block.json
+deleted file mode 100644
+--- a/src/main/resources/assets/attribute/models/block/carrot_block.json	(revision 3097d617362fb110c763711b0ef0c81f6bfda34c)
++++ /dev/null	(revision 3097d617362fb110c763711b0ef0c81f6bfda34c)
+@@ -1,13 +0,0 @@
+-{
+-    "parent": "block/cube",
+-    "textures": {
+-        "particle": "attribute:block/carrot_block/carrot_block_up",
+-        "north": "attribute:block/carrot_block/carrot_block_side",
+-        "south": "attribute:block/carrot_block/carrot_block_side",
+-        "east": "attribute:block/carrot_block/carrot_block_side",
+-        "west": "attribute:block/carrot_block/carrot_block_side",
+-        "up": "attribute:block/carrot_block/carrot_block_up",
+-        "down": "attribute:block/carrot_block/carrot_block_bottom"
+-    }
+-}
+-
+Index: src/main/resources/assets/attribute/models/item/red_iron_ore.json
+===================================================================
+diff --git a/src/main/resources/assets/attribute/models/item/red_iron_ore.json b/src/main/resources/assets/attribute/models/item/red_iron_ore.json
+deleted file mode 100644
+--- a/src/main/resources/assets/attribute/models/item/red_iron_ore.json	(revision 3097d617362fb110c763711b0ef0c81f6bfda34c)
++++ /dev/null	(revision 3097d617362fb110c763711b0ef0c81f6bfda34c)
+@@ -1,4 +0,0 @@
+-{
+-    "parent": "attribute:block/red_iron_ore"
+-}
+-
+Index: src/main/resources/assets/attribute/models/item/raw_red_iron_item.json
+===================================================================
+diff --git a/src/main/resources/assets/attribute/models/item/raw_red_iron_item.json b/src/main/resources/assets/attribute/models/item/raw_red_iron_item.json
+deleted file mode 100644
+--- a/src/main/resources/assets/attribute/models/item/raw_red_iron_item.json	(revision 3097d617362fb110c763711b0ef0c81f6bfda34c)
++++ /dev/null	(revision 3097d617362fb110c763711b0ef0c81f6bfda34c)
+@@ -1,6 +0,0 @@
+-{
+-    "parent": "minecraft:item/generated",
+-    "textures": {
+-        "layer0": "attribute:item/drop/raw_red_iron"
+-    }
+-}
+\ No newline at end of file
+Index: src/main/resources/data/attribute/recipes/potato.json
+===================================================================
+diff --git a/src/main/resources/data/attribute/recipes/potato.json b/src/main/resources/data/attribute/recipes/potato.json
+deleted file mode 100644
+--- a/src/main/resources/data/attribute/recipes/potato.json	(revision 3097d617362fb110c763711b0ef0c81f6bfda34c)
++++ /dev/null	(revision 3097d617362fb110c763711b0ef0c81f6bfda34c)
+@@ -1,13 +0,0 @@
+-{
+-  "type": "minecraft:crafting_shapeless",
+-  "group": "potato",
+-  "ingredients": [
+-    {
+-      "item": "attribute:potato_block_item"
+-    }
+-  ],
+-  "result": {
+-    "item": "minecraft:potato",
+-    "count": 8
+-  }
+-}
+\ No newline at end of file
+Index: src/main/resources/assets/attribute/models/item/golden_netherite_sword.json
+===================================================================
+diff --git a/src/main/resources/assets/attribute/models/item/golden_netherite_sword.json b/src/main/resources/assets/attribute/models/item/golden_netherite_sword.json
+deleted file mode 100644
+--- a/src/main/resources/assets/attribute/models/item/golden_netherite_sword.json	(revision 3097d617362fb110c763711b0ef0c81f6bfda34c)
++++ /dev/null	(revision 3097d617362fb110c763711b0ef0c81f6bfda34c)
+@@ -1,6 +0,0 @@
+-{
+-    "parent": "minecraft:item/handheld",
+-    "textures": {
+-        "layer0": "attribute:item/weapon/golden_netherite_sword"
+-    }
+-}
+\ No newline at end of file
+Index: src/main/resources/assets/attribute/blockstates/raw_red_iron_block.json
+===================================================================
+diff --git a/src/main/resources/assets/attribute/blockstates/raw_red_iron_block.json b/src/main/resources/assets/attribute/blockstates/raw_red_iron_block.json
+deleted file mode 100644
+--- a/src/main/resources/assets/attribute/blockstates/raw_red_iron_block.json	(revision 3097d617362fb110c763711b0ef0c81f6bfda34c)
++++ /dev/null	(revision 3097d617362fb110c763711b0ef0c81f6bfda34c)
+@@ -1,6 +0,0 @@
+-{
+-    "variants": {
+-        "": { "model": "attribute:block/raw_red_iron_block" }
+-    }
+-}
+-
+Index: src/main/resources/data/attribute/loot_tables/blocks/raw_red_iron_block.json
+===================================================================
+diff --git a/src/main/resources/data/attribute/loot_tables/blocks/raw_red_iron_block.json b/src/main/resources/data/attribute/loot_tables/blocks/raw_red_iron_block.json
+deleted file mode 100644
+--- a/src/main/resources/data/attribute/loot_tables/blocks/raw_red_iron_block.json	(revision 3097d617362fb110c763711b0ef0c81f6bfda34c)
++++ /dev/null	(revision 3097d617362fb110c763711b0ef0c81f6bfda34c)
+@@ -1,20 +0,0 @@
+-{
+-    "type": "minecraft:block",
+-    "pools": [
+-        {
+-            "rolls": 1,
+-            "entries": [
+-                {
+-                    "type": "minecraft:item",
+-                    "name": "attribute:raw_red_iron_block_item"
+-                }
+-            ],
+-            "conditions": [
+-                {
+-                    "condition": "minecraft:survives_explosion"
+-                }
+-            ]
+-        }
+-    ]
+-}
+-
+Index: src/main/resources/data/attribute/recipes/potato_block_item.json
+===================================================================
+diff --git a/src/main/resources/data/attribute/recipes/potato_block_item.json b/src/main/resources/data/attribute/recipes/potato_block_item.json
+deleted file mode 100644
+--- a/src/main/resources/data/attribute/recipes/potato_block_item.json	(revision 3097d617362fb110c763711b0ef0c81f6bfda34c)
++++ /dev/null	(revision 3097d617362fb110c763711b0ef0c81f6bfda34c)
+@@ -1,21 +0,0 @@
+-{
+-    "type": "minecraft:crafting_shaped",
+-    "pattern": [
+-        "WWW",
+-        "WRW",
+-        "WWW"
+-    ],
+-    "key": {
+-        "W": {
+-            "item": "minecraft:potato"
+-        },
+-        "R": {
+-            "tag": "minecraft:planks"
+-        }
+-    },
+-    "result": {
+-        "item": "attribute:potato_block_item",
+-        "count": 1
+-    }
+-}
+-
+Index: src/main/resources/assets/attribute/models/item/iron_netherite_sword.json
+===================================================================
+diff --git a/src/main/resources/assets/attribute/models/item/iron_netherite_sword.json b/src/main/resources/assets/attribute/models/item/iron_netherite_sword.json
+deleted file mode 100644
+--- a/src/main/resources/assets/attribute/models/item/iron_netherite_sword.json	(revision 3097d617362fb110c763711b0ef0c81f6bfda34c)
++++ /dev/null	(revision 3097d617362fb110c763711b0ef0c81f6bfda34c)
+@@ -1,6 +0,0 @@
+-{
+-    "parent": "minecraft:item/handheld",
+-    "textures": {
+-        "layer0": "attribute:item/weapon/iron_netherite_sword"
+-    }
+-}
+\ No newline at end of file
+Index: src/main/resources/assets/attribute/models/item/diamond_netherite_boot.json
+===================================================================
+diff --git a/src/main/resources/assets/attribute/models/item/diamond_netherite_boot.json b/src/main/resources/assets/attribute/models/item/diamond_netherite_boot.json
+deleted file mode 100644
+--- a/src/main/resources/assets/attribute/models/item/diamond_netherite_boot.json	(revision 3097d617362fb110c763711b0ef0c81f6bfda34c)
++++ /dev/null	(revision 3097d617362fb110c763711b0ef0c81f6bfda34c)
+@@ -1,6 +0,0 @@
+-{
+-  "parent": "item/generated",
+-  "textures": {
+-    "layer0": "attribute:item/armor/boot/diamond_netherite_boot"
+-  }
+-}
+\ No newline at end of file
+Index: src/main/resources/assets/attribute/models/block/red_iron_ore.json
+===================================================================
+diff --git a/src/main/resources/assets/attribute/models/block/red_iron_ore.json b/src/main/resources/assets/attribute/models/block/red_iron_ore.json
+deleted file mode 100644
+--- a/src/main/resources/assets/attribute/models/block/red_iron_ore.json	(revision 3097d617362fb110c763711b0ef0c81f6bfda34c)
++++ /dev/null	(revision 3097d617362fb110c763711b0ef0c81f6bfda34c)
+@@ -1,7 +0,0 @@
+-{
+-    "parent": "minecraft:block/cube_all",
+-    "textures": {
+-        "all": "attribute:block/cube/red_iron_ore"
+-    }
+-}
+-
+Index: src/main/resources/assets/attribute/models/item/diamond_netherite_sword.json
+===================================================================
+diff --git a/src/main/resources/assets/attribute/models/item/diamond_netherite_sword.json b/src/main/resources/assets/attribute/models/item/diamond_netherite_sword.json
+deleted file mode 100644
+--- a/src/main/resources/assets/attribute/models/item/diamond_netherite_sword.json	(revision 3097d617362fb110c763711b0ef0c81f6bfda34c)
++++ /dev/null	(revision 3097d617362fb110c763711b0ef0c81f6bfda34c)
+@@ -1,6 +0,0 @@
+-{
+-    "parent": "minecraft:item/handheld",
+-    "textures": {
+-        "layer0": "attribute:item/weapon/diamond_netherite_sword"
+-    }
+-}
+\ No newline at end of file
+Index: src/main/resources/assets/attribute/blockstates/potato_block.json
+===================================================================
+diff --git a/src/main/resources/assets/attribute/blockstates/potato_block.json b/src/main/resources/assets/attribute/blockstates/potato_block.json
+deleted file mode 100644
+--- a/src/main/resources/assets/attribute/blockstates/potato_block.json	(revision 3097d617362fb110c763711b0ef0c81f6bfda34c)
++++ /dev/null	(revision 3097d617362fb110c763711b0ef0c81f6bfda34c)
+@@ -1,8 +0,0 @@
+-{
+-    "variants": {
+-        "": {
+-            "model": "attribute:block/potato_block"
+-        }
+-    }
+-}
+-
+Index: src/main/resources/assets/attribute/lang/zh_cn.json
+===================================================================
+diff --git a/src/main/resources/assets/attribute/lang/zh_cn.json b/src/main/resources/assets/attribute/lang/zh_cn.json
+deleted file mode 100644
+--- a/src/main/resources/assets/attribute/lang/zh_cn.json	(revision 3097d617362fb110c763711b0ef0c81f6bfda34c)
++++ /dev/null	(revision 3097d617362fb110c763711b0ef0c81f6bfda34c)
+@@ -1,23 +0,0 @@
+-{
+-    "enchantment.chant.agile": "机敏",
+-    "enchantment.chant.regeneration": "再生",
+-    "enchantment.chant.suck_blood": "生命偷取",
+-    "enchantment.chant.creeper_killer": "爬行杀手",
+-    "enchantment.chant.slowness": "冰矢",
+-    "enchantment.chant.judge": "执法者",
+-    "enchantment.chant.critical": "会心",
+-    "itemGroup.attribute.item": "伶盗龙的属性模组",
+-    "item.attribute.iron_netherite_sword": "镶铁合金剑",
+-    "item.attribute.golden_netherite_sword": "镶金合金剑",
+-    "item.attribute.diamond_netherite_sword": "镶钻合金剑",
+-    "item.attribute.emerald_netherite_sword": "镶珠合金剑",
+-    "block.attribute.carrot_block": "胡萝卜块",
+-    "block.attribute.potato_block": "马铃薯块",
+-    "attribute.judge.killTip": "曙光女神的裁决！",
+-    "attribute.critical.activeTip": "你忽然感觉气转丹田，会心一击！",
+-    "item.attribute.red_iron_ore": "赤金矿石",
+-    "item.attribute.raw_red_iron_block_item": "赤金块",
+-    "block.attribute.red_iron_ore": "赤金矿石",
+-    "block.attribute.raw_red_iron_block": "赤金块",
+-    "item.attribute.raw_red_iron_item": "粗赤金"
+-}
+\ No newline at end of file
+Index: src/main/resources/assets/attribute/lang/zh_tw.json
+===================================================================
+diff --git a/src/main/resources/assets/attribute/lang/zh_tw.json b/src/main/resources/assets/attribute/lang/zh_tw.json
+deleted file mode 100644
+--- a/src/main/resources/assets/attribute/lang/zh_tw.json	(revision 3097d617362fb110c763711b0ef0c81f6bfda34c)
++++ /dev/null	(revision 3097d617362fb110c763711b0ef0c81f6bfda34c)
+@@ -1,23 +0,0 @@
+-{
+-    "enchantment.chant.agile": "機敏",
+-    "enchantment.chant.regeneration": "療傷",
+-    "enchantment.chant.suck_blood": "飲血",
+-    "enchantment.chant.creeper_killer": "苦力怕杀手",
+-    "enchantment.chant.slowness": "冰箭頭",
+-    "enchantment.chant.judge": "劊子手",
+-    "enchantment.chant.critical": "暴擊",
+-    "itemGroup.attribute.item": "快盜龍的屬性模組",
+-    "item.attribute.iron_netherite_sword": "粹鉄獄骨劍",
+-    "item.attribute.golden_netherite_sword": "鍍金獄骨劍",
+-    "item.attribute.diamond_netherite_sword": "鑲鑽獄骨劍",
+-    "item.attribute.emerald_netherite_sword": "獄骨寶劍",
+-    "block.attribute.carrot_block": "胡蘿蔔塊",
+-    "block.attribute.potato_block": "馬鈴薯塊",
+-    "attribute.judge.killTip": "斬滅暴徒！",
+-    "attribute.critical.activeTip": "箭似流星，恰中要害！",
+-    "item.attribute.red_iron_ore": "赤鐵原礦石",
+-    "item.attribute.raw_red_iron_block_item": "赤鐵原礦方塊",
+-    "block.attribute.red_iron_ore": "赤鐵原礦石",
+-    "block.attribute.raw_red_iron_block": "赤鐵原礦方塊",
+-    "item.attribute.raw_red_iron_item": "赤鐵原礦"
+-}
+\ No newline at end of file
+Index: src/main/resources/data/attribute/recipes/iron_netherite_sword.json
+===================================================================
+diff --git a/src/main/resources/data/attribute/recipes/iron_netherite_sword.json b/src/main/resources/data/attribute/recipes/iron_netherite_sword.json
+deleted file mode 100644
+--- a/src/main/resources/data/attribute/recipes/iron_netherite_sword.json	(revision 3097d617362fb110c763711b0ef0c81f6bfda34c)
++++ /dev/null	(revision 3097d617362fb110c763711b0ef0c81f6bfda34c)
+@@ -1,12 +0,0 @@
+-{
+-    "type": "minecraft:smithing",
+-    "base": {
+-        "item": "minecraft:netherite_sword"
+-    },
+-    "addition": {
+-        "item": "minecraft:iron_block"
+-    },
+-    "result": {
+-        "item": "attribute:iron_netherite_sword"
+-    }
+-}
+\ No newline at end of file
+Index: src/main/resources/data/attribute/recipes/carrot_block_item.json
+===================================================================
+diff --git a/src/main/resources/data/attribute/recipes/carrot_block_item.json b/src/main/resources/data/attribute/recipes/carrot_block_item.json
+deleted file mode 100644
+--- a/src/main/resources/data/attribute/recipes/carrot_block_item.json	(revision 3097d617362fb110c763711b0ef0c81f6bfda34c)
++++ /dev/null	(revision 3097d617362fb110c763711b0ef0c81f6bfda34c)
+@@ -1,21 +0,0 @@
+-{
+-    "type": "minecraft:crafting_shaped",
+-    "pattern": [
+-        "WWW",
+-        "WRW",
+-        "WWW"
+-    ],
+-    "key": {
+-        "W": {
+-            "item": "minecraft:carrot"
+-        },
+-        "R": {
+-            "tag": "minecraft:planks"
+-        }
+-    },
+-    "result": {
+-        "item": "attribute:carrot_block_item",
+-        "count": 1
+-    }
+-}
+-
+Index: src/main/resources/assets/attribute/models/block/raw_red_iron_block.json
+===================================================================
+diff --git a/src/main/resources/assets/attribute/models/block/raw_red_iron_block.json b/src/main/resources/assets/attribute/models/block/raw_red_iron_block.json
+deleted file mode 100644
+--- a/src/main/resources/assets/attribute/models/block/raw_red_iron_block.json	(revision 3097d617362fb110c763711b0ef0c81f6bfda34c)
++++ /dev/null	(revision 3097d617362fb110c763711b0ef0c81f6bfda34c)
+@@ -1,7 +0,0 @@
+-{
+-    "parent": "minecraft:block/cube_all",
+-    "textures": {
+-        "all": "attribute:block/cube/raw_red_iron_block"
+-    }
+-}
+-
+Index: src/main/resources/data/attribute/recipes/diamond_netherite_sword.json
+===================================================================
+diff --git a/src/main/resources/data/attribute/recipes/diamond_netherite_sword.json b/src/main/resources/data/attribute/recipes/diamond_netherite_sword.json
+deleted file mode 100644
+--- a/src/main/resources/data/attribute/recipes/diamond_netherite_sword.json	(revision 3097d617362fb110c763711b0ef0c81f6bfda34c)
++++ /dev/null	(revision 3097d617362fb110c763711b0ef0c81f6bfda34c)
+@@ -1,12 +0,0 @@
+-{
+-    "type": "minecraft:smithing",
+-    "base": {
+-        "item": "minecraft:netherite_sword"
+-    },
+-    "addition": {
+-        "item": "minecraft:diamond"
+-    },
+-    "result": {
+-        "item": "attribute:diamond_netherite_sword"
+-    }
+-}
+\ No newline at end of file
+Index: src/main/resources/data/attribute/recipes/carrot.json
+===================================================================
+diff --git a/src/main/resources/data/attribute/recipes/carrot.json b/src/main/resources/data/attribute/recipes/carrot.json
+deleted file mode 100644
+--- a/src/main/resources/data/attribute/recipes/carrot.json	(revision 3097d617362fb110c763711b0ef0c81f6bfda34c)
++++ /dev/null	(revision 3097d617362fb110c763711b0ef0c81f6bfda34c)
+@@ -1,13 +0,0 @@
+-{
+-    "type": "minecraft:crafting_shapeless",
+-    "group": "carrot",
+-    "ingredients": [
+-        {
+-            "item": "attribute:carrot_block_item"
+-        }
+-    ],
+-    "result": {
+-        "item": "minecraft:carrot",
+-        "count": 8
+-    }
+-}
+\ No newline at end of file
+Index: src/main/resources/data/attribute/loot_tables/blocks/carrot_block.json
+===================================================================
+diff --git a/src/main/resources/data/attribute/loot_tables/blocks/carrot_block.json b/src/main/resources/data/attribute/loot_tables/blocks/carrot_block.json
+deleted file mode 100644
+--- a/src/main/resources/data/attribute/loot_tables/blocks/carrot_block.json	(revision 3097d617362fb110c763711b0ef0c81f6bfda34c)
++++ /dev/null	(revision 3097d617362fb110c763711b0ef0c81f6bfda34c)
+@@ -1,20 +0,0 @@
+-{
+-    "type": "minecraft:block",
+-    "pools": [
+-        {
+-            "rolls": 1,
+-            "entries": [
+-                {
+-                    "type": "minecraft:item",
+-                    "name": "attribute:carrot_block_item"
+-                }
+-            ],
+-            "conditions": [
+-                {
+-                    "condition": "minecraft:survives_explosion"
+-                }
+-            ]
+-        }
+-    ]
+-}
+-
+Index: src/main/resources/data/attribute/recipes/diamond_netherite_boot.json
+===================================================================
+diff --git a/src/main/resources/data/attribute/recipes/diamond_netherite_boot.json b/src/main/resources/data/attribute/recipes/diamond_netherite_boot.json
+deleted file mode 100644
+--- a/src/main/resources/data/attribute/recipes/diamond_netherite_boot.json	(revision 3097d617362fb110c763711b0ef0c81f6bfda34c)
++++ /dev/null	(revision 3097d617362fb110c763711b0ef0c81f6bfda34c)
+@@ -1,12 +0,0 @@
+-{
+-  "type": "minecraft:smithing",
+-  "base": {
+-    "item": "minecraft:netherite_boots"
+-  },
+-  "addition": {
+-    "item": "minecraft:diamond"
+-  },
+-  "result": {
+-    "item": "attribute:diamond_netherite_boot"
+-  }
+-}
+\ No newline at end of file
+Index: src/main/resources/assets/attribute/blockstates/red_iron_ore.json
+===================================================================
+diff --git a/src/main/resources/assets/attribute/blockstates/red_iron_ore.json b/src/main/resources/assets/attribute/blockstates/red_iron_ore.json
+deleted file mode 100644
+--- a/src/main/resources/assets/attribute/blockstates/red_iron_ore.json	(revision 3097d617362fb110c763711b0ef0c81f6bfda34c)
++++ /dev/null	(revision 3097d617362fb110c763711b0ef0c81f6bfda34c)
+@@ -1,6 +0,0 @@
+-{
+-    "variants": {
+-        "": { "model": "attribute:block/red_iron_ore" }
+-    }
+-}
+-
+Index: src/main/resources/data/attribute/loot_tables/blocks/red_iron_ore.json
+===================================================================
+diff --git a/src/main/resources/data/attribute/loot_tables/blocks/red_iron_ore.json b/src/main/resources/data/attribute/loot_tables/blocks/red_iron_ore.json
+deleted file mode 100644
+--- a/src/main/resources/data/attribute/loot_tables/blocks/red_iron_ore.json	(revision 3097d617362fb110c763711b0ef0c81f6bfda34c)
++++ /dev/null	(revision 3097d617362fb110c763711b0ef0c81f6bfda34c)
+@@ -1,58 +0,0 @@
+-{
+-  "type": "minecraft:block",
+-  "pools": [
+-    {
+-      "rolls": 1.0,
+-      "bonus_rolls": 0.0,
+-      "entries": [
+-        {
+-          "type": "minecraft:alternatives",
+-          "children": [
+-            {
+-              "type": "minecraft:item",
+-              "conditions": [
+-                {
+-                  "condition": "minecraft:match_tool",
+-                  "predicate": {
+-                    "enchantments": [
+-                      {
+-                        "enchantment": "minecraft:silk_touch",
+-                        "levels": {
+-                          "min": 1
+-                        }
+-                      }
+-                    ]
+-                  }
+-                }
+-              ],
+-              "name": "attribute:red_iron_ore"
+-            },
+-            {
+-              "type": "minecraft:item",
+-              "functions": [
+-                {
+-                  "function": "minecraft:set_count",
+-                  "count": {
+-                    "type": "minecraft:uniform",
+-                    "min": 2.0,
+-                    "max": 3.0
+-                  },
+-                  "add": false
+-                },
+-                {
+-                  "function": "minecraft:apply_bonus",
+-                  "enchantment": "minecraft:fortune",
+-                  "formula": "minecraft:ore_drops"
+-                },
+-                {
+-                  "function": "minecraft:explosion_decay"
+-                }
+-              ],
+-              "name": "attribute:raw_red_iron_item"
+-            }
+-          ]
+-        }
+-      ]
+-    }
+-  ]
+-}
+\ No newline at end of file
+Index: src/main/resources/data/attribute/recipes/emerald_netherite_sword.json
+===================================================================
+diff --git a/src/main/resources/data/attribute/recipes/emerald_netherite_sword.json b/src/main/resources/data/attribute/recipes/emerald_netherite_sword.json
+deleted file mode 100644
+--- a/src/main/resources/data/attribute/recipes/emerald_netherite_sword.json	(revision 3097d617362fb110c763711b0ef0c81f6bfda34c)
++++ /dev/null	(revision 3097d617362fb110c763711b0ef0c81f6bfda34c)
+@@ -1,12 +0,0 @@
+-{
+-    "type": "minecraft:smithing",
+-    "base": {
+-        "item": "minecraft:netherite_sword"
+-    },
+-    "addition": {
+-        "item": "minecraft:emerald"
+-    },
+-    "result": {
+-        "item": "attribute:emerald_netherite_sword"
+-    }
+-}
+\ No newline at end of file
+Index: src/main/resources/data/attribute/recipes/raw_red_iron_item.json
+===================================================================
+diff --git a/src/main/resources/data/attribute/recipes/raw_red_iron_item.json b/src/main/resources/data/attribute/recipes/raw_red_iron_item.json
+deleted file mode 100644
+--- a/src/main/resources/data/attribute/recipes/raw_red_iron_item.json	(revision 3097d617362fb110c763711b0ef0c81f6bfda34c)
++++ /dev/null	(revision 3097d617362fb110c763711b0ef0c81f6bfda34c)
+@@ -1,13 +0,0 @@
+-{
+-  "type": "minecraft:crafting_shapeless",
+-  "group": "red_iron",
+-  "ingredients": [
+-    {
+-      "item": "attribute:raw_red_iron_block_item"
+-    }
+-  ],
+-  "result": {
+-    "item": "attribute:raw_red_iron_item",
+-    "count": 9
+-  }
+-}
+\ No newline at end of file
+Index: src/main/resources/assets/attribute/models/item/potato_block_item.json
+===================================================================
+diff --git a/src/main/resources/assets/attribute/models/item/potato_block_item.json b/src/main/resources/assets/attribute/models/item/potato_block_item.json
+deleted file mode 100644
+--- a/src/main/resources/assets/attribute/models/item/potato_block_item.json	(revision 3097d617362fb110c763711b0ef0c81f6bfda34c)
++++ /dev/null	(revision 3097d617362fb110c763711b0ef0c81f6bfda34c)
+@@ -1,4 +0,0 @@
+-{
+-    "parent": "attribute:block/potato_block"
+-}
+-
+Index: src/main/resources/assets/attribute/models/block/potato_block.json
+===================================================================
+diff --git a/src/main/resources/assets/attribute/models/block/potato_block.json b/src/main/resources/assets/attribute/models/block/potato_block.json
+deleted file mode 100644
+--- a/src/main/resources/assets/attribute/models/block/potato_block.json	(revision 3097d617362fb110c763711b0ef0c81f6bfda34c)
++++ /dev/null	(revision 3097d617362fb110c763711b0ef0c81f6bfda34c)
+@@ -1,12 +0,0 @@
+-{
+-    "parent": "block/cube",
+-    "textures": {
+-        "particle": "attribute:block/potato_block/potato_block_side",
+-        "north": "attribute:block/potato_block/potato_block_side",
+-        "south": "attribute:block/potato_block/potato_block_side",
+-        "east": "attribute:block/potato_block/potato_block_side",
+-        "west": "attribute:block/potato_block/potato_block_side",
+-        "up": "attribute:block/potato_block/potato_block_up",
+-        "down": "attribute:block/potato_block/potato_block_bottom"
+-    }
+-}
+\ No newline at end of file
+Index: src/main/resources/assets/attribute/models/item/emerald_netherite_sword.json
+===================================================================
+diff --git a/src/main/resources/assets/attribute/models/item/emerald_netherite_sword.json b/src/main/resources/assets/attribute/models/item/emerald_netherite_sword.json
+deleted file mode 100644
+--- a/src/main/resources/assets/attribute/models/item/emerald_netherite_sword.json	(revision 3097d617362fb110c763711b0ef0c81f6bfda34c)
++++ /dev/null	(revision 3097d617362fb110c763711b0ef0c81f6bfda34c)
+@@ -1,6 +0,0 @@
+-{
+-    "parent": "minecraft:item/handheld",
+-    "textures": {
+-        "layer0": "attribute:item/weapon/emerald_netherite_sword"
+-    }
+-}
+\ No newline at end of file
+Index: src/main/resources/data/attribute/loot_tables/blocks/potato_block.json
+===================================================================
+diff --git a/src/main/resources/data/attribute/loot_tables/blocks/potato_block.json b/src/main/resources/data/attribute/loot_tables/blocks/potato_block.json
+deleted file mode 100644
+--- a/src/main/resources/data/attribute/loot_tables/blocks/potato_block.json	(revision 3097d617362fb110c763711b0ef0c81f6bfda34c)
++++ /dev/null	(revision 3097d617362fb110c763711b0ef0c81f6bfda34c)
+@@ -1,20 +0,0 @@
+-{
+-  "type": "minecraft:block",
+-  "pools": [
+-    {
+-      "rolls": 1,
+-      "entries": [
+-        {
+-          "type": "minecraft:item",
+-          "name": "attribute:potato_block_item"
+-        }
+-      ],
+-      "conditions": [
+-        {
+-          "condition": "minecraft:survives_explosion"
+-        }
+-      ]
+-    }
+-  ]
+-}
+-
+Index: src/main/resources/data/attribute/recipes/copper_ingot.json
+===================================================================
+diff --git a/src/main/resources/data/attribute/recipes/copper_ingot.json b/src/main/resources/data/attribute/recipes/copper_ingot.json
+deleted file mode 100644
+--- a/src/main/resources/data/attribute/recipes/copper_ingot.json	(revision 3097d617362fb110c763711b0ef0c81f6bfda34c)
++++ /dev/null	(revision 3097d617362fb110c763711b0ef0c81f6bfda34c)
+@@ -1,9 +0,0 @@
+-{
+-  "type": "minecraft:smoking",
+-  "ingredient": {
+-    "item": "attribute:raw_red_iron_item"
+-  },
+-  "result": "minecraft:copper_ingot",
+-  "experience": 0.9,
+-  "cookingtime": 100
+-}
+\ No newline at end of file
+Index: src/main/resources/assets/attribute/blockstates/carrot_block.json
+===================================================================
+diff --git a/src/main/resources/assets/attribute/blockstates/carrot_block.json b/src/main/resources/assets/attribute/blockstates/carrot_block.json
+deleted file mode 100644
+--- a/src/main/resources/assets/attribute/blockstates/carrot_block.json	(revision 3097d617362fb110c763711b0ef0c81f6bfda34c)
++++ /dev/null	(revision 3097d617362fb110c763711b0ef0c81f6bfda34c)
+@@ -1,8 +0,0 @@
+-{
+-    "variants": {
+-        "": {
+-            "model": "attribute:block/carrot_block"
+-        }
+-    }
+-}
+-
+Index: src/main/resources/data/attribute/recipes/raw_red_iron_block_item.json
+===================================================================
+diff --git a/src/main/resources/data/attribute/recipes/raw_red_iron_block_item.json b/src/main/resources/data/attribute/recipes/raw_red_iron_block_item.json
+deleted file mode 100644
+--- a/src/main/resources/data/attribute/recipes/raw_red_iron_block_item.json	(revision 3097d617362fb110c763711b0ef0c81f6bfda34c)
++++ /dev/null	(revision 3097d617362fb110c763711b0ef0c81f6bfda34c)
+@@ -1,18 +0,0 @@
+-{
+-    "type": "minecraft:crafting_shaped",
+-    "pattern": [
+-        "WWW",
+-        "WWW",
+-        "WWW"
+-    ],
+-    "key": {
+-        "W": {
+-            "item": "attribute:raw_red_iron_item"
+-        }
+-    },
+-    "result": {
+-        "item": "attribute:raw_red_iron_block_item",
+-        "count": 1
+-    }
+-}
+-
+Index: src/main/resources/data/attribute/recipes/golden_netherite_sword.json
+===================================================================
+diff --git a/src/main/resources/data/attribute/recipes/golden_netherite_sword.json b/src/main/resources/data/attribute/recipes/golden_netherite_sword.json
+deleted file mode 100644
+--- a/src/main/resources/data/attribute/recipes/golden_netherite_sword.json	(revision 3097d617362fb110c763711b0ef0c81f6bfda34c)
++++ /dev/null	(revision 3097d617362fb110c763711b0ef0c81f6bfda34c)
+@@ -1,12 +0,0 @@
+-{
+-    "type": "minecraft:smithing",
+-    "base": {
+-        "item": "minecraft:netherite_sword"
+-    },
+-    "addition": {
+-        "item": "minecraft:gold_block"
+-    },
+-    "result": {
+-        "item": "attribute:golden_netherite_sword"
+-    }
+-}
+\ No newline at end of file
+Index: src/main/resources/data/attribute/recipes/gold_ingot.json
+===================================================================
+diff --git a/src/main/resources/data/attribute/recipes/gold_ingot.json b/src/main/resources/data/attribute/recipes/gold_ingot.json
+deleted file mode 100644
+--- a/src/main/resources/data/attribute/recipes/gold_ingot.json	(revision 3097d617362fb110c763711b0ef0c81f6bfda34c)
++++ /dev/null	(revision 3097d617362fb110c763711b0ef0c81f6bfda34c)
+@@ -1,9 +0,0 @@
+-{
+-  "type": "minecraft:blasting",
+-  "ingredient": {
+-    "item": "attribute:raw_red_iron_item"
+-  },
+-  "result": "minecraft:gold_ingot",
+-  "experience": 0.3,
+-  "cookingtime": 100
+-}
+\ No newline at end of file
+Index: src/main/resources/data/attribute/recipes/iron_ingot.json
+===================================================================
+diff --git a/src/main/resources/data/attribute/recipes/iron_ingot.json b/src/main/resources/data/attribute/recipes/iron_ingot.json
+deleted file mode 100644
+--- a/src/main/resources/data/attribute/recipes/iron_ingot.json	(revision 3097d617362fb110c763711b0ef0c81f6bfda34c)
++++ /dev/null	(revision 3097d617362fb110c763711b0ef0c81f6bfda34c)
+@@ -1,9 +0,0 @@
+-{
+-  "type": "minecraft:smelting",
+-  "ingredient": {
+-    "item": "attribute:raw_red_iron_item"
+-  },
+-  "result": "minecraft:iron_ingot",
+-  "experience": 0.6,
+-  "cookingtime": 100
+-}
+\ No newline at end of file
+Index: src/main/resources/assets/attribute/lang/en_us.json
+===================================================================
+diff --git a/src/main/resources/assets/attribute/lang/en_us.json b/src/main/resources/assets/attribute/lang/en_us.json
+deleted file mode 100644
+--- a/src/main/resources/assets/attribute/lang/en_us.json	(revision 3097d617362fb110c763711b0ef0c81f6bfda34c)
++++ /dev/null	(revision 3097d617362fb110c763711b0ef0c81f6bfda34c)
+@@ -1,23 +0,0 @@
+-{
+-    "enchantment.chant.agile": "agile",
+-    "enchantment.chant.regeneration": "regeneration",
+-    "enchantment.chant.suck_blood": "blood sucker",
+-    "enchantment.chant.creeper_killer": "creeper killer",
+-    "enchantment.chant.slowness": "slowness",
+-    "enchantment.chant.judge": "judge",
+-    "enchantment.chant.critical": "critical",
+-    "itemGroup.attribute.item": "velociraptor's attrStat",
+-    "item.attribute.iron_netherite_sword": "netherite iron alloy sword",
+-    "item.attribute.golden_netherite_sword": "netherite gold alloy sword",
+-    "item.attribute.diamond_netherite_sword": "netherite diamond inlay sword",
+-    "item.attribute.emerald_netherite_sword": "netherite emerald inlay sword",
+-    "block.attribute.carrot_block": "carrot block",
+-    "block.attribute.potato_block": "potato block",
+-    "attribute.judge.killTip": "The illegal should always been judged!",
+-    "attribute.critical.activeTip": "headshot, you did it!",
+-    "item.attribute.red_iron_ore": "red iron ore",
+-    "item.attribute.raw_red_iron_block_item": "raw red iron block",
+-    "block.attribute.red_iron_ore": "red iron ore",
+-    "block.attribute.raw_red_iron_block": "raw red iron block",
+-    "item.attribute.raw_red_iron_item": "raw red iron"
+-}
+\ No newline at end of file
+Index: src/main/resources/assets/attribute/models/item/carrot_block_item.json
+===================================================================
+diff --git a/src/main/resources/assets/attribute/models/item/carrot_block_item.json b/src/main/resources/assets/attribute/models/item/carrot_block_item.json
+deleted file mode 100644
+--- a/src/main/resources/assets/attribute/models/item/carrot_block_item.json	(revision 3097d617362fb110c763711b0ef0c81f6bfda34c)
++++ /dev/null	(revision 3097d617362fb110c763711b0ef0c81f6bfda34c)
+@@ -1,4 +0,0 @@
+-{
+-    "parent": "attribute:block/carrot_block"
+-}
+-
+Index: src/main/resources/assets/attribute/models/item/raw_red_iron_block_item.json
+===================================================================
+diff --git a/src/main/resources/assets/attribute/models/item/raw_red_iron_block_item.json b/src/main/resources/assets/attribute/models/item/raw_red_iron_block_item.json
+deleted file mode 100644
+--- a/src/main/resources/assets/attribute/models/item/raw_red_iron_block_item.json	(revision 3097d617362fb110c763711b0ef0c81f6bfda34c)
++++ /dev/null	(revision 3097d617362fb110c763711b0ef0c81f6bfda34c)
+@@ -1,3 +0,0 @@
+-{
+-    "parent": "attribute:block/raw_red_iron_block"
+-}
+\ No newline at end of file
+Index: src/main/java/net/attribute/velociraptor/mixin/AttributeMixin.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package net.attribute.velociraptor.mixin;\r\n\r\nimport net.attribute.velociraptor.AttributeStat;\r\nimport net.minecraft.client.gui.screen.TitleScreen;\r\nimport org.spongepowered.asm.mixin.Mixin;\r\nimport org.spongepowered.asm.mixin.injection.At;\r\nimport org.spongepowered.asm.mixin.injection.Inject;\r\nimport org.spongepowered.asm.mixin.injection.callback.CallbackInfo;\r\n\r\n@Mixin(TitleScreen.class)\r\npublic class AttributeMixin {\r\n    @Inject(at = @At(\"HEAD\"), method = \"init()V\")\r\n    private void init(CallbackInfo info) {\r\n        AttributeStat.LOGGER.info(\"This line is printed by an example mod mixin!\");\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/net/attribute/velociraptor/mixin/AttributeMixin.java b/src/main/java/net/attribute/velociraptor/mixin/AttributeMixin.java
+--- a/src/main/java/net/attribute/velociraptor/mixin/AttributeMixin.java	(revision 3097d617362fb110c763711b0ef0c81f6bfda34c)
++++ b/src/main/java/net/attribute/velociraptor/mixin/AttributeMixin.java	(date 1639206737132)
+@@ -1,6 +1,6 @@
+ package net.attribute.velociraptor.mixin;
+ 
+-import net.attribute.velociraptor.AttributeStat;
++import net.attribute.velociraptor.Velociraptors;
+ import net.minecraft.client.gui.screen.TitleScreen;
+ import org.spongepowered.asm.mixin.Mixin;
+ import org.spongepowered.asm.mixin.injection.At;
+@@ -11,6 +11,6 @@
+ public class AttributeMixin {
+     @Inject(at = @At("HEAD"), method = "init()V")
+     private void init(CallbackInfo info) {
+-        AttributeStat.LOGGER.info("This line is printed by an example mod mixin!");
++        Velociraptors.LOGGER.info("This line is printed by an example mod mixin!");
+     }
+ }
+Index: gradle.properties
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+># Done to increase the memory available to gradle.\r\norg.gradle.jvmargs=-Xmx1G\r\n# Fabric Properties\r\n# check these on https://fabricmc.net/versions.html\r\nminecraft_version=1.18\r\nyarn_mappings=1.18+build.1\r\nloader_version=0.12.8\r\n# Mod Properties\r\nmod_version=1.0.0\r\nmaven_group=org.velociraptor\r\narchives_base_name=attribute-stat\r\n# Dependencies\r\nfabric_version=0.43.1+1.18\r\npal_version=1.5.0\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>ISO-8859-1
+===================================================================
+diff --git a/gradle.properties b/gradle.properties
+--- a/gradle.properties	(revision 3097d617362fb110c763711b0ef0c81f6bfda34c)
++++ b/gradle.properties	(date 1639206737024)
+@@ -2,13 +2,13 @@
+ org.gradle.jvmargs=-Xmx1G
+ # Fabric Properties
+ # check these on https://fabricmc.net/versions.html
+-minecraft_version=1.18
+-yarn_mappings=1.18+build.1
+-loader_version=0.12.8
++minecraft_version=1.18.1
++yarn_mappings=1.18.1+build.2
++loader_version=0.12.11
+ # Mod Properties
+-mod_version=1.0.0
++mod_version=0.0.1
+ maven_group=org.velociraptor
+ archives_base_name=attribute-stat
+ # Dependencies
+-fabric_version=0.43.1+1.18
++fabric_version=0.44.0+1.18
+ pal_version=1.5.0
+Index: src/main/java/net/attribute/velociraptor/item/materials/NetheriteMaterials.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package net.attribute.velociraptor.item.materials;\r\n\r\nimport net.minecraft.entity.EquipmentSlot;\r\nimport net.minecraft.item.ArmorMaterial;\r\nimport net.minecraft.item.ItemConvertible;\r\nimport net.minecraft.item.Items;\r\nimport net.minecraft.recipe.Ingredient;\r\nimport net.minecraft.sound.SoundEvent;\r\nimport net.minecraft.sound.SoundEvents;\r\nimport net.minecraft.util.Lazy;\r\n\r\n/**\r\n * @author warren\r\n * @function\r\n * @createDate 2021/12/3 11:57\r\n * @updateDate 2021/12/3 11:57\r\n * @updateAuthor\r\n * @describe\r\n */\r\npublic enum NetheriteMaterials implements ArmorMaterial {\r\n    IRON_NETHERITE(\"iron_netherite\", 47, new int[]{4, 8, 10, 5}, 15, SoundEvents.ITEM_ARMOR_EQUIP_IRON, 3.0F, 0.3F),\r\n    GOLDEN_NETHERITE(\"golden_netherite\", 37, new int[]{3, 6, 8, 3}, 35, SoundEvents.ITEM_ARMOR_EQUIP_GOLD, 3.0F, 0.1F),\r\n    DIAMOND_NETHERITE(\"diamond_netherite\", 47, new int[]{3, 6, 9, 4}, 15, SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 6.0F, 0.1F),\r\n    EMERALD_NETHERITE(\"emerald_netherite\", 70, new int[]{3, 6, 8, 3}, 15, SoundEvents.ITEM_ARMOR_EQUIP_NETHERITE, 3.0F, 0.1F)\r\n    ;\r\n\r\n    private static final int[] BASE_DURABILITY = new int[]{13, 15, 16, 11};\r\n    private final String name;\r\n    private final int durabilityMultiplier;\r\n    private final int[] protectionAmounts;\r\n    private final int enchantAbility;\r\n    private final SoundEvent equipSound;\r\n    private final float toughness;\r\n    private final float knockBackResistance;\r\n\r\n    NetheriteMaterials(String name, int durabilityMultiplier, int[] protectionAmounts, int enchantAbility, SoundEvent equipSound, float toughness, float knockBackResistance) {\r\n        this.name = name;\r\n        this.durabilityMultiplier = durabilityMultiplier;\r\n        this.protectionAmounts = protectionAmounts;\r\n        this.enchantAbility = enchantAbility;\r\n        this.equipSound = equipSound;\r\n        this.toughness = toughness;\r\n        this.knockBackResistance = knockBackResistance;\r\n    }\r\n\r\n    public int getDurability(EquipmentSlot slot) {\r\n        return BASE_DURABILITY[slot.getEntitySlotId()] * this.durabilityMultiplier;\r\n    }\r\n\r\n    public int getProtectionAmount(EquipmentSlot slot) {\r\n        return this.protectionAmounts[slot.getEntitySlotId()];\r\n    }\r\n\r\n    public int getEnchantability() {\r\n        return this.enchantAbility;\r\n    }\r\n\r\n    public SoundEvent getEquipSound() {\r\n        return this.equipSound;\r\n    }\r\n\r\n    public Ingredient getRepairIngredient() {\r\n        return Ingredient.ofItems(Items.NETHERITE_INGOT);\r\n    }\r\n\r\n    public String getName() {\r\n        return this.name;\r\n    }\r\n\r\n    public float getToughness() {\r\n        return this.toughness;\r\n    }\r\n\r\n    public float getKnockbackResistance() {\r\n        return this.knockBackResistance;\r\n    }\r\n\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/net/attribute/velociraptor/item/materials/NetheriteMaterials.java b/src/main/java/net/attribute/velociraptor/item/materials/NetheriteMaterials.java
+--- a/src/main/java/net/attribute/velociraptor/item/materials/NetheriteMaterials.java	(revision 3097d617362fb110c763711b0ef0c81f6bfda34c)
++++ b/src/main/java/net/attribute/velociraptor/item/materials/NetheriteMaterials.java	(date 1639206737109)
+@@ -1,13 +1,12 @@
+ package net.attribute.velociraptor.item.materials;
+ 
++import net.attribute.velociraptor.util.ConstantString;
+ import net.minecraft.entity.EquipmentSlot;
+ import net.minecraft.item.ArmorMaterial;
+-import net.minecraft.item.ItemConvertible;
+ import net.minecraft.item.Items;
+ import net.minecraft.recipe.Ingredient;
+ import net.minecraft.sound.SoundEvent;
+ import net.minecraft.sound.SoundEvents;
+-import net.minecraft.util.Lazy;
+ 
+ /**
+  * @author warren
+@@ -18,10 +17,10 @@
+  * @describe
+  */
+ public enum NetheriteMaterials implements ArmorMaterial {
+-    IRON_NETHERITE("iron_netherite", 47, new int[]{4, 8, 10, 5}, 15, SoundEvents.ITEM_ARMOR_EQUIP_IRON, 3.0F, 0.3F),
+-    GOLDEN_NETHERITE("golden_netherite", 37, new int[]{3, 6, 8, 3}, 35, SoundEvents.ITEM_ARMOR_EQUIP_GOLD, 3.0F, 0.1F),
+-    DIAMOND_NETHERITE("diamond_netherite", 47, new int[]{3, 6, 9, 4}, 15, SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 6.0F, 0.1F),
+-    EMERALD_NETHERITE("emerald_netherite", 70, new int[]{3, 6, 8, 3}, 15, SoundEvents.ITEM_ARMOR_EQUIP_NETHERITE, 3.0F, 0.1F)
++    DIAMOND_NETHERITE(ConstantString.DIAMOND_NETHERITE, 47, new int[]{3, 6, 9, 4}, 15, SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 6.0F, 0.1F),
++    EMERALD_NETHERITE(ConstantString.EMERALD_NETHERITE, 70, new int[]{3, 6, 8, 3}, 15, SoundEvents.ITEM_ARMOR_EQUIP_NETHERITE, 3.0F, 0.1F),
++    GOLDEN_NETHERITE(ConstantString.GOLDEN_NETHERITE, 37, new int[]{3, 6, 8, 3}, 35, SoundEvents.ITEM_ARMOR_EQUIP_GOLD, 3.0F, 0.1F),
++    IRON_NETHERITE(ConstantString.IRON_NETHERITE, 47, new int[]{4, 8, 10, 5}, 15, SoundEvents.ITEM_ARMOR_EQUIP_IRON, 3.0F, 0.3F)
+     ;
+ 
+     private static final int[] BASE_DURABILITY = new int[]{13, 15, 16, 11};
+@@ -43,34 +42,42 @@
+         this.knockBackResistance = knockBackResistance;
+     }
+ 
++    @Override
+     public int getDurability(EquipmentSlot slot) {
+         return BASE_DURABILITY[slot.getEntitySlotId()] * this.durabilityMultiplier;
+     }
+ 
++    @Override
+     public int getProtectionAmount(EquipmentSlot slot) {
+         return this.protectionAmounts[slot.getEntitySlotId()];
+     }
+ 
++    @Override
+     public int getEnchantability() {
+         return this.enchantAbility;
+     }
+ 
++    @Override
+     public SoundEvent getEquipSound() {
+         return this.equipSound;
+     }
+ 
++    @Override
+     public Ingredient getRepairIngredient() {
+         return Ingredient.ofItems(Items.NETHERITE_INGOT);
+     }
+ 
++    @Override
+     public String getName() {
+         return this.name;
+     }
+ 
++    @Override
+     public float getToughness() {
+         return this.toughness;
+     }
+ 
++    @Override
+     public float getKnockbackResistance() {
+         return this.knockBackResistance;
+     }
+Index: src/main/java/net/attribute/velociraptor/enchant/SuckBloodEnchantment.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package net.attribute.velociraptor.enchant;\r\n\r\nimport net.attribute.velociraptor.AttributeStat;\r\nimport net.minecraft.enchantment.Enchantment;\r\nimport net.minecraft.enchantment.EnchantmentTarget;\r\nimport net.minecraft.entity.Entity;\r\nimport net.minecraft.entity.EquipmentSlot;\r\nimport net.minecraft.entity.LivingEntity;\r\nimport net.minecraft.entity.damage.DamageRecord;\r\nimport net.minecraft.entity.damage.DamageTracker;\r\nimport net.minecraft.item.ItemStack;\r\n\r\n/**\r\n * @author warren\r\n */\r\npublic class SuckBloodEnchantment extends Enchantment {\r\n    public SuckBloodEnchantment() {\r\n        super(Rarity.COMMON, EnchantmentTarget.WEAPON, new EquipmentSlot[]{EquipmentSlot.MAINHAND});\r\n    }\r\n\r\n    @Override\r\n    public boolean isAcceptableItem(ItemStack stack) {\r\n        boolean condition = false;\r\n        try {\r\n            condition = EnchantmentTarget.WEAPON.isAcceptableItem(stack.getItem());\r\n        } catch (Exception exception) {\r\n            exception.printStackTrace();\r\n        }\r\n        return condition;\r\n    }\r\n\r\n    @Override\r\n    protected boolean canAccept(Enchantment other) {\r\n        boolean condition = false;\r\n        try {\r\n            condition = other.type == EnchantmentTarget.WEAPON && !(other instanceof RegenerationEnchantment);\r\n        } catch (Exception exception) {\r\n            exception.printStackTrace();\r\n        }\r\n        return condition;\r\n    }\r\n\r\n    @Override\r\n    public int getMinLevel() {\r\n        return 1;\r\n    }\r\n\r\n    @Override\r\n    public int getMaxLevel() {\r\n        return 3;\r\n    }\r\n\r\n    @Override\r\n    public void onTargetDamaged(LivingEntity user, Entity target, int level) {\r\n        if (target instanceof LivingEntity targetEntity && user.isAlive()) {\r\n            float recoverHealth = user.getHealth();\r\n            DamageTracker damageTracker = targetEntity.getDamageTracker();\r\n            if (damageTracker != null) {\r\n                DamageRecord damageRecord = damageTracker.getMostRecentDamage();\r\n                if (damageRecord != null) {\r\n                    recoverHealth += damageRecord.getDamage() * level * 0.1F;\r\n                } else {\r\n                    recoverHealth += 20 * level * 0.2F;\r\n                }\r\n            } else {\r\n                recoverHealth += 20 * level * 0.2F;\r\n            }\r\n            AttributeStat.LOGGER.info(\"回复生命值：{}\", recoverHealth);\r\n            user.setHealth(recoverHealth);\r\n        }\r\n        super.onTargetDamaged(user, target, level);\r\n    }\r\n\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/net/attribute/velociraptor/enchant/SuckBloodEnchantment.java b/src/main/java/net/attribute/velociraptor/enchant/SuckBloodEnchantment.java
+--- a/src/main/java/net/attribute/velociraptor/enchant/SuckBloodEnchantment.java	(revision 3097d617362fb110c763711b0ef0c81f6bfda34c)
++++ b/src/main/java/net/attribute/velociraptor/enchant/SuckBloodEnchantment.java	(date 1639206737065)
+@@ -1,6 +1,6 @@
+ package net.attribute.velociraptor.enchant;
+ 
+-import net.attribute.velociraptor.AttributeStat;
++import net.attribute.velociraptor.Velociraptors;
+ import net.minecraft.enchantment.Enchantment;
+ import net.minecraft.enchantment.EnchantmentTarget;
+ import net.minecraft.entity.Entity;
+@@ -65,7 +65,7 @@
+             } else {
+                 recoverHealth += 20 * level * 0.2F;
+             }
+-            AttributeStat.LOGGER.info("回复生命值：{}", recoverHealth);
++            Velociraptors.LOGGER.info("回复生命值：{}", recoverHealth);
+             user.setHealth(recoverHealth);
+         }
+         super.onTargetDamaged(user, target, level);
+Index: src/main/java/net/attribute/velociraptor/init/Items.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package net.attribute.velociraptor.init;\r\n\r\nimport net.attribute.velociraptor.item.armor.boot.DiamondNetheriteBoot;\r\nimport net.attribute.velociraptor.item.drop.RawRedIronItem;\r\nimport net.attribute.velociraptor.item.weapon.DiamondNetheriteSword;\r\nimport net.attribute.velociraptor.item.weapon.EmeraldNetheriteSword;\r\nimport net.attribute.velociraptor.item.weapon.GoldenNetheriteSword;\r\nimport net.attribute.velociraptor.item.weapon.IronNetheriteSword;\r\nimport net.attribute.velociraptor.util.FabricSettingFactory;\r\nimport net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;\r\nimport net.minecraft.entity.EquipmentSlot;\r\nimport net.minecraft.item.Item;\r\nimport net.minecraft.item.ItemStack;\r\nimport net.minecraft.util.Identifier;\r\nimport net.minecraft.util.Rarity;\r\nimport net.minecraft.util.registry.Registry;\r\n\r\nimport java.util.Vector;\r\n\r\npublic class Items {\r\n\r\n    public static FabricItemGroupBuilder ATTRIBUTE_STAT_MOD;\r\n    public static final Vector<ItemStack> ITEM_STACK_VECTOR = new Vector<>();\r\n\r\n    private Items() {\r\n    }\r\n\r\n    /**\r\n     * 实例化物品\r\n     */\r\n    public static void initialize() {\r\n        //sword\r\n        IronNetheriteSword ironNetheriteSword = Registry.register(Registry.ITEM, new Identifier(\"attribute\", \"iron_netherite_sword\"), new IronNetheriteSword(FabricSettingFactory.buildSwordItemSetting(2031, true, Rarity.EPIC)));\r\n        GoldenNetheriteSword goldenNetheriteSword = Registry.register(Registry.ITEM, new Identifier(\"attribute\", \"golden_netherite_sword\"), new GoldenNetheriteSword(FabricSettingFactory.buildSwordItemSetting(1561, true, Rarity.EPIC)));\r\n        DiamondNetheriteSword diamondNetheriteSword = Registry.register(Registry.ITEM, new Identifier(\"attribute\", \"diamond_netherite_sword\"), new DiamondNetheriteSword(FabricSettingFactory.buildSwordItemSetting(2031, true, Rarity.EPIC)));\r\n        EmeraldNetheriteSword emeraldNetheriteSword = Registry.register(Registry.ITEM, new Identifier(\"attribute\", \"emerald_netherite_sword\"), new EmeraldNetheriteSword(FabricSettingFactory.buildSwordItemSetting(4062, true, Rarity.EPIC)));\r\n        //armor\r\n        DiamondNetheriteBoot diamondNetheriteBoot = Registry.register(Registry.ITEM, new Identifier(\"attribute\", \"diamond_netherite_boot\"), new DiamondNetheriteBoot(FabricSettingFactory.buildArmorItemSetting(66, true, Rarity.EPIC, EquipmentSlot.FEET)));\r\n        //raw ore\r\n        RawRedIronItem rawRedIronItem = Registry.register(Registry.ITEM, new Identifier(\"attribute\", \"raw_red_iron_item\"), new RawRedIronItem(new Item.Settings().maxCount(64).rarity(Rarity.COMMON)));\r\n        ITEM_STACK_VECTOR.add(new ItemStack(ironNetheriteSword));\r\n        ITEM_STACK_VECTOR.add(new ItemStack(goldenNetheriteSword));\r\n        ITEM_STACK_VECTOR.add(new ItemStack(diamondNetheriteSword));\r\n        ITEM_STACK_VECTOR.add(new ItemStack(emeraldNetheriteSword));\r\n        ITEM_STACK_VECTOR.add(new ItemStack(rawRedIronItem));\r\n        ITEM_STACK_VECTOR.add(new ItemStack(diamondNetheriteBoot));\r\n    }\r\n\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/net/attribute/velociraptor/init/Items.java b/src/main/java/net/attribute/velociraptor/init/Items.java
+--- a/src/main/java/net/attribute/velociraptor/init/Items.java	(revision 3097d617362fb110c763711b0ef0c81f6bfda34c)
++++ b/src/main/java/net/attribute/velociraptor/init/Items.java	(date 1639206737095)
+@@ -1,13 +1,28 @@
+ package net.attribute.velociraptor.init;
+ 
+ import net.attribute.velociraptor.item.armor.boot.DiamondNetheriteBoot;
++import net.attribute.velociraptor.item.armor.boot.EmeraldNetheriteBoot;
++import net.attribute.velociraptor.item.armor.boot.GoldenNetheriteBoot;
++import net.attribute.velociraptor.item.armor.boot.IronNetheriteBoot;
++import net.attribute.velociraptor.item.armor.chest.DiamondNetheriteChest;
++import net.attribute.velociraptor.item.armor.chest.EmeraldNetheriteChest;
++import net.attribute.velociraptor.item.armor.chest.GoldenNetheriteChest;
++import net.attribute.velociraptor.item.armor.chest.IronNetheriteChest;
++import net.attribute.velociraptor.item.armor.helmet.DiamondNetheriteHelmet;
++import net.attribute.velociraptor.item.armor.helmet.EmeraldNetheriteHelmet;
++import net.attribute.velociraptor.item.armor.helmet.GoldenNetheriteHelmet;
++import net.attribute.velociraptor.item.armor.helmet.IronNetheriteHelmet;
++import net.attribute.velociraptor.item.armor.legging.DiamondNetheriteLegging;
++import net.attribute.velociraptor.item.armor.legging.EmeraldNetheriteLegging;
++import net.attribute.velociraptor.item.armor.legging.GoldenNetheriteLegging;
++import net.attribute.velociraptor.item.armor.legging.IronNetheriteLegging;
+ import net.attribute.velociraptor.item.drop.RawRedIronItem;
+ import net.attribute.velociraptor.item.weapon.DiamondNetheriteSword;
+ import net.attribute.velociraptor.item.weapon.EmeraldNetheriteSword;
+ import net.attribute.velociraptor.item.weapon.GoldenNetheriteSword;
+ import net.attribute.velociraptor.item.weapon.IronNetheriteSword;
++import net.attribute.velociraptor.util.ConstantString;
+ import net.attribute.velociraptor.util.FabricSettingFactory;
+-import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
+ import net.minecraft.entity.EquipmentSlot;
+ import net.minecraft.item.Item;
+ import net.minecraft.item.ItemStack;
+@@ -17,9 +32,11 @@
+ 
+ import java.util.Vector;
+ 
++/**
++ * @author warren
++ */
+ public class Items {
+ 
+-    public static FabricItemGroupBuilder ATTRIBUTE_STAT_MOD;
+     public static final Vector<ItemStack> ITEM_STACK_VECTOR = new Vector<>();
+ 
+     private Items() {
+@@ -30,20 +47,53 @@
+      */
+     public static void initialize() {
+         //sword
+-        IronNetheriteSword ironNetheriteSword = Registry.register(Registry.ITEM, new Identifier("attribute", "iron_netherite_sword"), new IronNetheriteSword(FabricSettingFactory.buildSwordItemSetting(2031, true, Rarity.EPIC)));
+-        GoldenNetheriteSword goldenNetheriteSword = Registry.register(Registry.ITEM, new Identifier("attribute", "golden_netherite_sword"), new GoldenNetheriteSword(FabricSettingFactory.buildSwordItemSetting(1561, true, Rarity.EPIC)));
+-        DiamondNetheriteSword diamondNetheriteSword = Registry.register(Registry.ITEM, new Identifier("attribute", "diamond_netherite_sword"), new DiamondNetheriteSword(FabricSettingFactory.buildSwordItemSetting(2031, true, Rarity.EPIC)));
+-        EmeraldNetheriteSword emeraldNetheriteSword = Registry.register(Registry.ITEM, new Identifier("attribute", "emerald_netherite_sword"), new EmeraldNetheriteSword(FabricSettingFactory.buildSwordItemSetting(4062, true, Rarity.EPIC)));
+-        //armor
+-        DiamondNetheriteBoot diamondNetheriteBoot = Registry.register(Registry.ITEM, new Identifier("attribute", "diamond_netherite_boot"), new DiamondNetheriteBoot(FabricSettingFactory.buildArmorItemSetting(66, true, Rarity.EPIC, EquipmentSlot.FEET)));
++        DiamondNetheriteSword diamondNetheriteSword = Registry.register(Registry.ITEM, new Identifier(ConstantString.MOD_ID, ConstantString.DIAMOND_NETHERITE + ConstantString.UNDER_LINE + ConstantString.SWORD), new DiamondNetheriteSword(FabricSettingFactory.buildSwordItemSetting(2031, true, Rarity.EPIC)));
++        EmeraldNetheriteSword emeraldNetheriteSword = Registry.register(Registry.ITEM, new Identifier(ConstantString.MOD_ID, ConstantString.EMERALD_NETHERITE + ConstantString.UNDER_LINE + ConstantString.SWORD), new EmeraldNetheriteSword(FabricSettingFactory.buildSwordItemSetting(4062, true, Rarity.EPIC)));
++        GoldenNetheriteSword goldenNetheriteSword = Registry.register(Registry.ITEM, new Identifier(ConstantString.MOD_ID, ConstantString.GOLDEN_NETHERITE + ConstantString.UNDER_LINE + ConstantString.SWORD), new GoldenNetheriteSword(FabricSettingFactory.buildSwordItemSetting(1561, true, Rarity.EPIC)));
++        IronNetheriteSword ironNetheriteSword = Registry.register(Registry.ITEM, new Identifier(ConstantString.MOD_ID, ConstantString.IRON_NETHERITE + ConstantString.UNDER_LINE + ConstantString.SWORD), new IronNetheriteSword(FabricSettingFactory.buildSwordItemSetting(2031, true, Rarity.EPIC)));
++        //armor boot
++        DiamondNetheriteBoot diamondNetheriteBoot = Registry.register(Registry.ITEM, new Identifier(ConstantString.MOD_ID, ConstantString.DIAMOND_NETHERITE + ConstantString.UNDER_LINE + ConstantString.BOOT), new DiamondNetheriteBoot(FabricSettingFactory.buildArmorItemSetting(66, true, Rarity.EPIC, EquipmentSlot.FEET)));
++        EmeraldNetheriteBoot emeraldNetheriteBoot = Registry.register(Registry.ITEM, new Identifier(ConstantString.MOD_ID, ConstantString.EMERALD_NETHERITE + ConstantString.UNDER_LINE + ConstantString.BOOT), new EmeraldNetheriteBoot(FabricSettingFactory.buildArmorItemSetting(100, true, Rarity.EPIC, EquipmentSlot.FEET)));
++        GoldenNetheriteBoot goldenNetheriteBoot = Registry.register(Registry.ITEM, new Identifier(ConstantString.MOD_ID, ConstantString.GOLDEN_NETHERITE + ConstantString.UNDER_LINE + ConstantString.BOOT), new GoldenNetheriteBoot(FabricSettingFactory.buildArmorItemSetting(37, true, Rarity.EPIC, EquipmentSlot.FEET)));
++        IronNetheriteBoot ironNetheriteBoot = Registry.register(Registry.ITEM, new Identifier(ConstantString.MOD_ID, ConstantString.IRON_NETHERITE + ConstantString.UNDER_LINE + ConstantString.BOOT), new IronNetheriteBoot(FabricSettingFactory.buildArmorItemSetting(50, true, Rarity.EPIC, EquipmentSlot.FEET)));
++        //armor chest
++        DiamondNetheriteChest diamondNetheriteChest = Registry.register(Registry.ITEM, new Identifier(ConstantString.MOD_ID, ConstantString.DIAMOND_NETHERITE + ConstantString.UNDER_LINE + ConstantString.CHEST), new DiamondNetheriteChest(FabricSettingFactory.buildArmorItemSetting(66, true, Rarity.EPIC, EquipmentSlot.CHEST)));
++        EmeraldNetheriteChest emeraldNetheriteChest = Registry.register(Registry.ITEM, new Identifier(ConstantString.MOD_ID, ConstantString.EMERALD_NETHERITE + ConstantString.UNDER_LINE + ConstantString.CHEST), new EmeraldNetheriteChest(FabricSettingFactory.buildArmorItemSetting(100, true, Rarity.EPIC, EquipmentSlot.CHEST)));
++        GoldenNetheriteChest goldenNetheriteChest = Registry.register(Registry.ITEM, new Identifier(ConstantString.MOD_ID, ConstantString.GOLDEN_NETHERITE + ConstantString.UNDER_LINE + ConstantString.CHEST), new GoldenNetheriteChest(FabricSettingFactory.buildArmorItemSetting(37, true, Rarity.EPIC, EquipmentSlot.CHEST)));
++        IronNetheriteChest ironNetheriteChest = Registry.register(Registry.ITEM, new Identifier(ConstantString.MOD_ID, ConstantString.IRON_NETHERITE + ConstantString.UNDER_LINE + ConstantString.CHEST), new IronNetheriteChest(FabricSettingFactory.buildArmorItemSetting(50, true, Rarity.EPIC, EquipmentSlot.CHEST)));
++        //armor helmet
++        DiamondNetheriteHelmet diamondNetheriteHelmet = Registry.register(Registry.ITEM, new Identifier(ConstantString.MOD_ID, ConstantString.DIAMOND_NETHERITE + ConstantString.UNDER_LINE + ConstantString.HELMET), new DiamondNetheriteHelmet(FabricSettingFactory.buildArmorItemSetting(66, true, Rarity.EPIC, EquipmentSlot.HEAD)));
++        EmeraldNetheriteHelmet emeraldNetheriteHelmet = Registry.register(Registry.ITEM, new Identifier(ConstantString.MOD_ID, ConstantString.EMERALD_NETHERITE + ConstantString.UNDER_LINE + ConstantString.HELMET), new EmeraldNetheriteHelmet(FabricSettingFactory.buildArmorItemSetting(100, true, Rarity.EPIC, EquipmentSlot.HEAD)));
++        GoldenNetheriteHelmet goldenNetheriteHelmet = Registry.register(Registry.ITEM, new Identifier(ConstantString.MOD_ID, ConstantString.GOLDEN_NETHERITE + ConstantString.UNDER_LINE + ConstantString.HELMET), new GoldenNetheriteHelmet(FabricSettingFactory.buildArmorItemSetting(37, true, Rarity.EPIC, EquipmentSlot.HEAD)));
++        IronNetheriteHelmet ironNetheriteHelmet = Registry.register(Registry.ITEM, new Identifier(ConstantString.MOD_ID, ConstantString.IRON_NETHERITE + ConstantString.UNDER_LINE + ConstantString.HELMET), new IronNetheriteHelmet(FabricSettingFactory.buildArmorItemSetting(50, true, Rarity.EPIC, EquipmentSlot.HEAD)));
++        //armor legging
++        DiamondNetheriteLegging diamondNetheriteLegging = Registry.register(Registry.ITEM, new Identifier(ConstantString.MOD_ID, ConstantString.DIAMOND_NETHERITE + ConstantString.UNDER_LINE + ConstantString.LEGGING), new DiamondNetheriteLegging(FabricSettingFactory.buildArmorItemSetting(66, true, Rarity.EPIC, EquipmentSlot.LEGS)));
++        EmeraldNetheriteLegging emeraldNetheriteLegging = Registry.register(Registry.ITEM, new Identifier(ConstantString.MOD_ID, ConstantString.EMERALD_NETHERITE + ConstantString.UNDER_LINE + ConstantString.LEGGING), new EmeraldNetheriteLegging(FabricSettingFactory.buildArmorItemSetting(100, true, Rarity.EPIC, EquipmentSlot.LEGS)));
++        GoldenNetheriteLegging goldenNetheriteLegging = Registry.register(Registry.ITEM, new Identifier(ConstantString.MOD_ID, ConstantString.GOLDEN_NETHERITE + ConstantString.UNDER_LINE + ConstantString.LEGGING), new GoldenNetheriteLegging(FabricSettingFactory.buildArmorItemSetting(37, true, Rarity.EPIC, EquipmentSlot.LEGS)));
++        IronNetheriteLegging ironNetheriteLegging = Registry.register(Registry.ITEM, new Identifier(ConstantString.MOD_ID, ConstantString.IRON_NETHERITE + ConstantString.UNDER_LINE + ConstantString.LEGGING), new IronNetheriteLegging(FabricSettingFactory.buildArmorItemSetting(50, true, Rarity.EPIC, EquipmentSlot.LEGS)));
+         //raw ore
+-        RawRedIronItem rawRedIronItem = Registry.register(Registry.ITEM, new Identifier("attribute", "raw_red_iron_item"), new RawRedIronItem(new Item.Settings().maxCount(64).rarity(Rarity.COMMON)));
+-        ITEM_STACK_VECTOR.add(new ItemStack(ironNetheriteSword));
+-        ITEM_STACK_VECTOR.add(new ItemStack(goldenNetheriteSword));
++        RawRedIronItem rawRedIronItem = Registry.register(Registry.ITEM, new Identifier(ConstantString.MOD_ID, ConstantString.RAW_RED_IRON_ITEM), new RawRedIronItem(new Item.Settings().maxCount(64).rarity(Rarity.COMMON)));
+         ITEM_STACK_VECTOR.add(new ItemStack(diamondNetheriteSword));
+         ITEM_STACK_VECTOR.add(new ItemStack(emeraldNetheriteSword));
+-        ITEM_STACK_VECTOR.add(new ItemStack(rawRedIronItem));
++        ITEM_STACK_VECTOR.add(new ItemStack(goldenNetheriteSword));
++        ITEM_STACK_VECTOR.add(new ItemStack(ironNetheriteSword));
+         ITEM_STACK_VECTOR.add(new ItemStack(diamondNetheriteBoot));
++        ITEM_STACK_VECTOR.add(new ItemStack(emeraldNetheriteBoot));
++        ITEM_STACK_VECTOR.add(new ItemStack(goldenNetheriteBoot));
++        ITEM_STACK_VECTOR.add(new ItemStack(ironNetheriteBoot));
++        ITEM_STACK_VECTOR.add(new ItemStack(diamondNetheriteChest));
++        ITEM_STACK_VECTOR.add(new ItemStack(emeraldNetheriteChest));
++        ITEM_STACK_VECTOR.add(new ItemStack(goldenNetheriteChest));
++        ITEM_STACK_VECTOR.add(new ItemStack(ironNetheriteChest));
++        ITEM_STACK_VECTOR.add(new ItemStack(diamondNetheriteHelmet));
++        ITEM_STACK_VECTOR.add(new ItemStack(emeraldNetheriteHelmet));
++        ITEM_STACK_VECTOR.add(new ItemStack(goldenNetheriteHelmet));
++        ITEM_STACK_VECTOR.add(new ItemStack(ironNetheriteHelmet));
++        ITEM_STACK_VECTOR.add(new ItemStack(diamondNetheriteLegging));
++        ITEM_STACK_VECTOR.add(new ItemStack(emeraldNetheriteLegging));
++        ITEM_STACK_VECTOR.add(new ItemStack(goldenNetheriteLegging));
++        ITEM_STACK_VECTOR.add(new ItemStack(ironNetheriteLegging));
++        ITEM_STACK_VECTOR.add(new ItemStack(rawRedIronItem));
+     }
+ 
+ }
+Index: src/main/java/net/attribute/velociraptor/init/Enchantments.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package net.attribute.velociraptor.init;\r\n\r\nimport net.attribute.velociraptor.enchant.*;\r\nimport net.minecraft.util.Identifier;\r\nimport net.minecraft.util.registry.Registry;\r\n\r\npublic class Enchantments {\r\n\r\n    private Enchantments() {\r\n    }\r\n\r\n    /**\r\n     * 实例化附魔\r\n     */\r\n    public static void initialize() {\r\n        Registry.register(Registry.ENCHANTMENT, new Identifier(\"chant\", \"agile\"), new AgileEnchantment());\r\n        Registry.register(Registry.ENCHANTMENT, new Identifier(\"chant\", \"regeneration\"), new RegenerationEnchantment());\r\n        Registry.register(Registry.ENCHANTMENT, new Identifier(\"chant\", \"suck_blood\"), new SuckBloodEnchantment());\r\n        Registry.register(Registry.ENCHANTMENT, new Identifier(\"chant\", \"creeper_killer\"), new CreeperKillerEnchantment());\r\n        Registry.register(Registry.ENCHANTMENT, new Identifier(\"chant\", \"slowness\"), new SlownessEnchantment());\r\n        Registry.register(Registry.ENCHANTMENT, new Identifier(\"chant\", \"judge\"), new JudgeEnchantment());\r\n        Registry.register(Registry.ENCHANTMENT, new Identifier(\"chant\", \"critical\"), new CriticalEnchantment());\r\n    }\r\n\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/net/attribute/velociraptor/init/Enchantments.java b/src/main/java/net/attribute/velociraptor/init/Enchantments.java
+--- a/src/main/java/net/attribute/velociraptor/init/Enchantments.java	(revision 3097d617362fb110c763711b0ef0c81f6bfda34c)
++++ b/src/main/java/net/attribute/velociraptor/init/Enchantments.java	(date 1639206737079)
+@@ -1,6 +1,7 @@
+ package net.attribute.velociraptor.init;
+ 
+ import net.attribute.velociraptor.enchant.*;
++import net.attribute.velociraptor.util.ConstantString;
+ import net.minecraft.util.Identifier;
+ import net.minecraft.util.registry.Registry;
+ 
+@@ -13,13 +14,13 @@
+      * 实例化附魔
+      */
+     public static void initialize() {
+-        Registry.register(Registry.ENCHANTMENT, new Identifier("chant", "agile"), new AgileEnchantment());
+-        Registry.register(Registry.ENCHANTMENT, new Identifier("chant", "regeneration"), new RegenerationEnchantment());
+-        Registry.register(Registry.ENCHANTMENT, new Identifier("chant", "suck_blood"), new SuckBloodEnchantment());
+-        Registry.register(Registry.ENCHANTMENT, new Identifier("chant", "creeper_killer"), new CreeperKillerEnchantment());
+-        Registry.register(Registry.ENCHANTMENT, new Identifier("chant", "slowness"), new SlownessEnchantment());
+-        Registry.register(Registry.ENCHANTMENT, new Identifier("chant", "judge"), new JudgeEnchantment());
+-        Registry.register(Registry.ENCHANTMENT, new Identifier("chant", "critical"), new CriticalEnchantment());
++        Registry.register(Registry.ENCHANTMENT, new Identifier(ConstantString.MOD_ID, ConstantString.AGILE), new AgileEnchantment());
++        Registry.register(Registry.ENCHANTMENT, new Identifier(ConstantString.MOD_ID, ConstantString.REGENERATION), new RegenerationEnchantment());
++        Registry.register(Registry.ENCHANTMENT, new Identifier(ConstantString.MOD_ID, ConstantString.SUCK_BLOOD), new SuckBloodEnchantment());
++        Registry.register(Registry.ENCHANTMENT, new Identifier(ConstantString.MOD_ID, ConstantString.CREEPER_KILLER), new CreeperKillerEnchantment());
++        Registry.register(Registry.ENCHANTMENT, new Identifier(ConstantString.MOD_ID, ConstantString.SLOWNESS), new SlownessEnchantment());
++        Registry.register(Registry.ENCHANTMENT, new Identifier(ConstantString.MOD_ID, ConstantString.JUDGE), new JudgeEnchantment());
++        Registry.register(Registry.ENCHANTMENT, new Identifier(ConstantString.MOD_ID, ConstantString.CRITICAL), new CriticalEnchantment());
+     }
+ 
+ }
+Index: src/main/java/net/attribute/velociraptor/enchant/JudgeEnchantment.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package net.attribute.velociraptor.enchant;\r\n\r\nimport net.attribute.velociraptor.AttributeStat;\r\nimport net.attribute.velociraptor.network.PlayerAttributeServerPacket;\r\nimport net.fabricmc.fabric.api.networking.v1.PacketByteBufs;\r\nimport net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;\r\nimport net.minecraft.client.MinecraftClient;\r\nimport net.minecraft.client.network.ClientPlayNetworkHandler;\r\nimport net.minecraft.enchantment.DamageEnchantment;\r\nimport net.minecraft.enchantment.Enchantment;\r\nimport net.minecraft.enchantment.EnchantmentTarget;\r\nimport net.minecraft.entity.Entity;\r\nimport net.minecraft.entity.EntityGroup;\r\nimport net.minecraft.entity.EquipmentSlot;\r\nimport net.minecraft.entity.LivingEntity;\r\nimport net.minecraft.entity.player.PlayerEntity;\r\nimport net.minecraft.network.PacketByteBuf;\r\nimport net.minecraft.network.packet.c2s.play.CustomPayloadC2SPacket;\r\nimport net.minecraft.server.MinecraftServer;\r\nimport net.minecraft.server.network.ServerPlayerEntity;\r\nimport net.minecraft.text.TranslatableText;\r\n\r\npublic class JudgeEnchantment extends Enchantment {\r\n\r\n    public JudgeEnchantment() {\r\n        super(Rarity.UNCOMMON, EnchantmentTarget.WEAPON, new EquipmentSlot[]{EquipmentSlot.MAINHAND});\r\n    }\r\n\r\n\r\n    @Override\r\n    public int getMinLevel() {\r\n        return 1;\r\n    }\r\n\r\n    @Override\r\n    public int getMaxLevel() {\r\n        return 5;\r\n    }\r\n\r\n    @Override\r\n    protected boolean canAccept(Enchantment other) {\r\n        boolean condition = false;\r\n        try {\r\n            condition = other.type == EnchantmentTarget.WEAPON && !(other instanceof DamageEnchantment);\r\n        } catch (Exception exception) {\r\n            exception.printStackTrace();\r\n        }\r\n        return condition;\r\n    }\r\n\r\n    @Override\r\n    public float getAttackDamage(int level, EntityGroup group) {\r\n        if (group == EntityGroup.ILLAGER) {\r\n            MinecraftClient minecraftClient = MinecraftClient.getInstance();\r\n            MinecraftServer minecraftClientServer = minecraftClient.getServer();\r\n            if (minecraftClient.player != null) {\r\n                PacketByteBuf packetByteBuf = PacketByteBufs.create();\r\n                packetByteBuf.writeString(\"health\");\r\n                packetByteBuf.writeInt(1);\r\n                CustomPayloadC2SPacket customPayloadC2SPacket = new CustomPayloadC2SPacket(PlayerAttributeServerPacket.VELOCIRAPTOR_ATTR_LEVEL_INSTANCE, packetByteBuf);\r\n                ClientPlayNetworkHandler clientPlayNetworkHandler = minecraftClient.getNetworkHandler();\r\n                if (clientPlayNetworkHandler == null) {\r\n                    AttributeStat.LOGGER.error(\"No network handler in this instance!\");\r\n                } else {\r\n                    clientPlayNetworkHandler.sendPacket(customPayloadC2SPacket);\r\n                }\r\n                if (minecraftClientServer != null && minecraftClientServer.isSingleplayer()) {\r\n                    AttributeStat.LOGGER.info(\"Player name is {}\", minecraftClientServer.getSinglePlayerName());\r\n                    AttributeStat.LOGGER.info(\"Player uuid is {}\", minecraftClient.player.getUuidAsString());\r\n                    AttributeStat.LOGGER.info(\"Player number = {}\", minecraftClientServer.getPlayerManager().getCurrentPlayerCount());\r\n                    ServerPlayerEntity serverPlayerEntity = minecraftClientServer.getPlayerManager().getPlayer(minecraftClient.player.getUuidAsString());\r\n                    PlayerEntity player = minecraftClient.player;\r\n                    if (serverPlayerEntity == null) {\r\n                        AttributeStat.LOGGER.error(\"No server player in this instance!\");\r\n                    } else {\r\n                        ServerPlayNetworking.send(serverPlayerEntity, PlayerAttributeServerPacket.VELOCIRAPTOR_ATTR_EXPERIENCE_INSTANCE, packetByteBuf);\r\n                        ServerPlayNetworking.send(serverPlayerEntity, PlayerAttributeServerPacket.VELOCIRAPTOR_ATTR_LEVEL_INSTANCE, packetByteBuf);\r\n                    }\r\n                } else {\r\n                    AttributeStat.LOGGER.error(\"No server in this instance!\");\r\n                }\r\n            } else {\r\n                AttributeStat.LOGGER.error(\"You just can't create a client player entity\");\r\n            }\r\n            return 3 + 3 * level;\r\n        }\r\n        return super.getAttackDamage(level, group);\r\n    }\r\n\r\n    @Override\r\n    public void onTargetDamaged(LivingEntity user, Entity target, int level) {\r\n        if (user instanceof PlayerEntity playerEntity && target instanceof LivingEntity targetEntity && targetEntity.isDead() && targetEntity.getGroup() == EntityGroup.ILLAGER) {\r\n            playerEntity.sendMessage(new TranslatableText(\"attribute.judge.killTip\"), true);\r\n        }\r\n        super.onTargetDamaged(user, target, level);\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/net/attribute/velociraptor/enchant/JudgeEnchantment.java b/src/main/java/net/attribute/velociraptor/enchant/JudgeEnchantment.java
+--- a/src/main/java/net/attribute/velociraptor/enchant/JudgeEnchantment.java	(revision 3097d617362fb110c763711b0ef0c81f6bfda34c)
++++ b/src/main/java/net/attribute/velociraptor/enchant/JudgeEnchantment.java	(date 1639206737058)
+@@ -1,6 +1,6 @@
+ package net.attribute.velociraptor.enchant;
+ 
+-import net.attribute.velociraptor.AttributeStat;
++import net.attribute.velociraptor.Velociraptors;
+ import net.attribute.velociraptor.network.PlayerAttributeServerPacket;
+ import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
+ import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
+@@ -60,27 +60,27 @@
+                 CustomPayloadC2SPacket customPayloadC2SPacket = new CustomPayloadC2SPacket(PlayerAttributeServerPacket.VELOCIRAPTOR_ATTR_LEVEL_INSTANCE, packetByteBuf);
+                 ClientPlayNetworkHandler clientPlayNetworkHandler = minecraftClient.getNetworkHandler();
+                 if (clientPlayNetworkHandler == null) {
+-                    AttributeStat.LOGGER.error("No network handler in this instance!");
++                    Velociraptors.LOGGER.error("No network handler in this instance!");
+                 } else {
+                     clientPlayNetworkHandler.sendPacket(customPayloadC2SPacket);
+                 }
+                 if (minecraftClientServer != null && minecraftClientServer.isSingleplayer()) {
+-                    AttributeStat.LOGGER.info("Player name is {}", minecraftClientServer.getSinglePlayerName());
+-                    AttributeStat.LOGGER.info("Player uuid is {}", minecraftClient.player.getUuidAsString());
+-                    AttributeStat.LOGGER.info("Player number = {}", minecraftClientServer.getPlayerManager().getCurrentPlayerCount());
++                    Velociraptors.LOGGER.info("Player name is {}", minecraftClientServer.getSinglePlayerName());
++                    Velociraptors.LOGGER.info("Player uuid is {}", minecraftClient.player.getUuidAsString());
++                    Velociraptors.LOGGER.info("Player number = {}", minecraftClientServer.getPlayerManager().getCurrentPlayerCount());
+                     ServerPlayerEntity serverPlayerEntity = minecraftClientServer.getPlayerManager().getPlayer(minecraftClient.player.getUuidAsString());
+                     PlayerEntity player = minecraftClient.player;
+                     if (serverPlayerEntity == null) {
+-                        AttributeStat.LOGGER.error("No server player in this instance!");
++                        Velociraptors.LOGGER.error("No server player in this instance!");
+                     } else {
+                         ServerPlayNetworking.send(serverPlayerEntity, PlayerAttributeServerPacket.VELOCIRAPTOR_ATTR_EXPERIENCE_INSTANCE, packetByteBuf);
+                         ServerPlayNetworking.send(serverPlayerEntity, PlayerAttributeServerPacket.VELOCIRAPTOR_ATTR_LEVEL_INSTANCE, packetByteBuf);
+                     }
+                 } else {
+-                    AttributeStat.LOGGER.error("No server in this instance!");
++                    Velociraptors.LOGGER.error("No server in this instance!");
+                 }
+             } else {
+-                AttributeStat.LOGGER.error("You just can't create a client player entity");
++                Velociraptors.LOGGER.error("You just can't create a client player entity");
+             }
+             return 3 + 3 * level;
+         }
+Index: src/main/java/net/attribute/velociraptor/init/Blocks.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package net.attribute.velociraptor.init;\r\n\r\nimport net.attribute.velociraptor.block.CarrotBlock;\r\nimport net.attribute.velociraptor.block.PotatoBlock;\r\nimport net.attribute.velociraptor.block.RawRedIronBlock;\r\nimport net.attribute.velociraptor.item.block.CarrotBlockItem;\r\nimport net.attribute.velociraptor.item.block.PotatoBlockItem;\r\nimport net.attribute.velociraptor.item.block.RawRedIronBlockItem;\r\nimport net.attribute.velociraptor.item.ore.RedIronOreItem;\r\nimport net.attribute.velociraptor.ore.RedIronOre;\r\nimport net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;\r\nimport net.minecraft.block.MapColor;\r\nimport net.minecraft.block.Material;\r\nimport net.minecraft.item.Item;\r\nimport net.minecraft.item.ItemStack;\r\nimport net.minecraft.sound.BlockSoundGroup;\r\nimport net.minecraft.util.Identifier;\r\nimport net.minecraft.util.Rarity;\r\nimport net.minecraft.util.registry.Registry;\r\n\r\npublic class Blocks {\r\n\r\n    private Blocks() {\r\n    }\r\n\r\n    /**\r\n     * 实例化方块\r\n     */\r\n    public static void initialize() {\r\n        CarrotBlock CARROT_BLOCK = Registry.register(Registry.BLOCK, new Identifier(\"attribute\", \"carrot_block\"), new CarrotBlock(FabricBlockSettings.of(Material.WOOD, MapColor.DARK_RED).strength(1.0F).sounds(BlockSoundGroup.WOOD).hardness(0.2F)));\r\n        PotatoBlock POTATO_BLOCK = Registry.register(Registry.BLOCK, new Identifier(\"attribute\", \"potato_block\"), new PotatoBlock(FabricBlockSettings.of(Material.WOOD, MapColor.DEEPSLATE_GRAY).strength(1.0F).sounds(BlockSoundGroup.WOOD).hardness(0.2F)));\r\n        RedIronOre RED_IRON_ORE = Registry.register(Registry.BLOCK, new Identifier(\"attribute\", \"red_iron_ore\"), new RedIronOre(FabricBlockSettings.of(Material.STONE).strength(2.5F).sounds(BlockSoundGroup.STONE).requiresTool()));\r\n        RawRedIronBlock RAW_RED_IRON_BLOCK = Registry.register(Registry.BLOCK, new Identifier(\"attribute\", \"raw_red_iron_block\"), new RawRedIronBlock(FabricBlockSettings.of(Material.STONE).strength(2.5F).sounds(BlockSoundGroup.STONE).requiresTool()));\r\n        //实例化方块对应的物品\r\n        CarrotBlockItem CARROT_BLOCK_ITEM = Registry.register(Registry.ITEM, new Identifier(\"attribute\", \"carrot_block_item\"), new CarrotBlockItem(CARROT_BLOCK, new Item.Settings().maxCount(64).rarity(Rarity.UNCOMMON)));\r\n        PotatoBlockItem POTATO_BLOCK_ITEM = Registry.register(Registry.ITEM, new Identifier(\"attribute\", \"potato_block_item\"), new PotatoBlockItem(POTATO_BLOCK, new Item.Settings().maxCount(64).rarity(Rarity.UNCOMMON)));\r\n        RedIronOreItem RED_IRON_ORE_ITEM = Registry.register(Registry.ITEM, new Identifier(\"attribute\", \"red_iron_ore\"), new RedIronOreItem(RED_IRON_ORE, new Item.Settings().maxCount(64).rarity(Rarity.COMMON)));\r\n        RawRedIronBlockItem RAW_RED_IRON_BLOCK_ITEM = Registry.register(Registry.ITEM, new Identifier(\"attribute\", \"raw_red_iron_block_item\"), new RawRedIronBlockItem(RAW_RED_IRON_BLOCK, new Item.Settings().maxCount(64).rarity(Rarity.COMMON)));\r\n        //注册物品\r\n        Items.ITEM_STACK_VECTOR.add(new ItemStack(CARROT_BLOCK_ITEM));\r\n        Items.ITEM_STACK_VECTOR.add(new ItemStack(POTATO_BLOCK_ITEM));\r\n        Items.ITEM_STACK_VECTOR.add(new ItemStack(RED_IRON_ORE_ITEM));\r\n        Items.ITEM_STACK_VECTOR.add(new ItemStack(RAW_RED_IRON_BLOCK_ITEM));\r\n    }\r\n\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/net/attribute/velociraptor/init/Blocks.java b/src/main/java/net/attribute/velociraptor/init/Blocks.java
+--- a/src/main/java/net/attribute/velociraptor/init/Blocks.java	(revision 3097d617362fb110c763711b0ef0c81f6bfda34c)
++++ b/src/main/java/net/attribute/velociraptor/init/Blocks.java	(date 1639206737065)
+@@ -1,5 +1,6 @@
+ package net.attribute.velociraptor.init;
+ 
++import net.attribute.velociraptor.Velociraptors;
+ import net.attribute.velociraptor.block.CarrotBlock;
+ import net.attribute.velociraptor.block.PotatoBlock;
+ import net.attribute.velociraptor.block.RawRedIronBlock;
+@@ -8,6 +9,9 @@
+ import net.attribute.velociraptor.item.block.RawRedIronBlockItem;
+ import net.attribute.velociraptor.item.ore.RedIronOreItem;
+ import net.attribute.velociraptor.ore.RedIronOre;
++import net.attribute.velociraptor.util.ConstantString;
++import net.fabricmc.fabric.api.biome.v1.BiomeModifications;
++import net.fabricmc.fabric.api.biome.v1.BiomeSelectors;
+ import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
+ import net.minecraft.block.MapColor;
+ import net.minecraft.block.Material;
+@@ -16,7 +20,16 @@
+ import net.minecraft.sound.BlockSoundGroup;
+ import net.minecraft.util.Identifier;
+ import net.minecraft.util.Rarity;
++import net.minecraft.util.registry.BuiltinRegistries;
+ import net.minecraft.util.registry.Registry;
++import net.minecraft.util.registry.RegistryKey;
++import net.minecraft.world.gen.GenerationStep;
++import net.minecraft.world.gen.YOffset;
++import net.minecraft.world.gen.decorator.HeightRangePlacementModifier;
++import net.minecraft.world.gen.decorator.SquarePlacementModifier;
++import net.minecraft.world.gen.feature.*;
++
++import static net.minecraft.world.gen.decorator.CountPlacementModifier.*;
+ 
+ public class Blocks {
+ 
+@@ -27,20 +40,28 @@
+      * 实例化方块
+      */
+     public static void initialize() {
+-        CarrotBlock CARROT_BLOCK = Registry.register(Registry.BLOCK, new Identifier("attribute", "carrot_block"), new CarrotBlock(FabricBlockSettings.of(Material.WOOD, MapColor.DARK_RED).strength(1.0F).sounds(BlockSoundGroup.WOOD).hardness(0.2F)));
+-        PotatoBlock POTATO_BLOCK = Registry.register(Registry.BLOCK, new Identifier("attribute", "potato_block"), new PotatoBlock(FabricBlockSettings.of(Material.WOOD, MapColor.DEEPSLATE_GRAY).strength(1.0F).sounds(BlockSoundGroup.WOOD).hardness(0.2F)));
+-        RedIronOre RED_IRON_ORE = Registry.register(Registry.BLOCK, new Identifier("attribute", "red_iron_ore"), new RedIronOre(FabricBlockSettings.of(Material.STONE).strength(2.5F).sounds(BlockSoundGroup.STONE).requiresTool()));
+-        RawRedIronBlock RAW_RED_IRON_BLOCK = Registry.register(Registry.BLOCK, new Identifier("attribute", "raw_red_iron_block"), new RawRedIronBlock(FabricBlockSettings.of(Material.STONE).strength(2.5F).sounds(BlockSoundGroup.STONE).requiresTool()));
++        //实例化方块
++        CarrotBlock carrotBlock = Registry.register(Registry.BLOCK, new Identifier(ConstantString.MOD_ID, ConstantString.CARROT_BLOCK), new CarrotBlock(FabricBlockSettings.of(Material.WOOD, MapColor.DARK_RED).strength(1.0F).sounds(BlockSoundGroup.WOOD).hardness(0.2F)));
++        PotatoBlock potatoBlock = Registry.register(Registry.BLOCK, new Identifier(ConstantString.MOD_ID, ConstantString.POTATO_BLOCK), new PotatoBlock(FabricBlockSettings.of(Material.WOOD, MapColor.DEEPSLATE_GRAY).strength(1.0F).sounds(BlockSoundGroup.WOOD).hardness(0.2F)));
++        RawRedIronBlock rawRedIronBlock = Registry.register(Registry.BLOCK, new Identifier(ConstantString.MOD_ID, ConstantString.RAW_RED_IRON_BLOCK), new RawRedIronBlock(FabricBlockSettings.of(Material.STONE).strength(2.5F).sounds(BlockSoundGroup.STONE).requiresTool()));
++        //实例化矿物
++        RedIronOre redIronOre = Registry.register(Registry.BLOCK, new Identifier(ConstantString.MOD_ID, ConstantString.RED_IRON_ORE), new RedIronOre(FabricBlockSettings.of(Material.STONE).strength(2.5F).sounds(BlockSoundGroup.STONE).requiresTool()));
+         //实例化方块对应的物品
+-        CarrotBlockItem CARROT_BLOCK_ITEM = Registry.register(Registry.ITEM, new Identifier("attribute", "carrot_block_item"), new CarrotBlockItem(CARROT_BLOCK, new Item.Settings().maxCount(64).rarity(Rarity.UNCOMMON)));
+-        PotatoBlockItem POTATO_BLOCK_ITEM = Registry.register(Registry.ITEM, new Identifier("attribute", "potato_block_item"), new PotatoBlockItem(POTATO_BLOCK, new Item.Settings().maxCount(64).rarity(Rarity.UNCOMMON)));
+-        RedIronOreItem RED_IRON_ORE_ITEM = Registry.register(Registry.ITEM, new Identifier("attribute", "red_iron_ore"), new RedIronOreItem(RED_IRON_ORE, new Item.Settings().maxCount(64).rarity(Rarity.COMMON)));
+-        RawRedIronBlockItem RAW_RED_IRON_BLOCK_ITEM = Registry.register(Registry.ITEM, new Identifier("attribute", "raw_red_iron_block_item"), new RawRedIronBlockItem(RAW_RED_IRON_BLOCK, new Item.Settings().maxCount(64).rarity(Rarity.COMMON)));
++        CarrotBlockItem carrotBlockItem = Registry.register(Registry.ITEM, new Identifier(ConstantString.MOD_ID, ConstantString.CARROT_BLOCK_ITEM), new CarrotBlockItem(carrotBlock, new Item.Settings().maxCount(64).rarity(Rarity.UNCOMMON)));
++        PotatoBlockItem potatoBlockItem = Registry.register(Registry.ITEM, new Identifier(ConstantString.MOD_ID, ConstantString.POTATO_BLOCK_ITEM), new PotatoBlockItem(potatoBlock, new Item.Settings().maxCount(64).rarity(Rarity.UNCOMMON)));
++        RedIronOreItem redIronOreItem = Registry.register(Registry.ITEM, new Identifier(ConstantString.MOD_ID, ConstantString.RED_IRON_ORE_ITEM), new RedIronOreItem(redIronOre, new Item.Settings().maxCount(64).rarity(Rarity.COMMON)));
++        RawRedIronBlockItem rawRedIronBlockItem = Registry.register(Registry.ITEM, new Identifier(ConstantString.MOD_ID, ConstantString.RAW_RED_IRON_BLOCK_ITEM), new RawRedIronBlockItem(rawRedIronBlock, new Item.Settings().maxCount(64).rarity(Rarity.COMMON)));
+         //注册物品
+-        Items.ITEM_STACK_VECTOR.add(new ItemStack(CARROT_BLOCK_ITEM));
+-        Items.ITEM_STACK_VECTOR.add(new ItemStack(POTATO_BLOCK_ITEM));
+-        Items.ITEM_STACK_VECTOR.add(new ItemStack(RED_IRON_ORE_ITEM));
+-        Items.ITEM_STACK_VECTOR.add(new ItemStack(RAW_RED_IRON_BLOCK_ITEM));
++        Items.ITEM_STACK_VECTOR.add(new ItemStack(carrotBlockItem));
++        Items.ITEM_STACK_VECTOR.add(new ItemStack(potatoBlockItem));
++        Items.ITEM_STACK_VECTOR.add(new ItemStack(redIronOreItem));
++        Items.ITEM_STACK_VECTOR.add(new ItemStack(rawRedIronBlockItem));
++        //注册矿物
++        ConfiguredFeature<?, ?> overWorldRedIronOreConfiguredFeature = Feature.ORE.configure(new OreFeatureConfig(OreConfiguredFeatures.STONE_ORE_REPLACEABLES, redIronOre.getDefaultState(), 12));
++        PlacedFeature overWorldRedIronOrePlacedFeature = overWorldRedIronOreConfiguredFeature.withPlacement(of(40), SquarePlacementModifier.of(), HeightRangePlacementModifier.uniform(YOffset.getBottom(), YOffset.fixed(64)));
++        Registry.register(BuiltinRegistries.CONFIGURED_FEATURE, new Identifier(ConstantString.MOD_ID, ConstantString.RED_IRON_ORE), overWorldRedIronOreConfiguredFeature);
++        Registry.register(BuiltinRegistries.PLACED_FEATURE, new Identifier(ConstantString.MOD_ID, ConstantString.RED_IRON_ORE), overWorldRedIronOrePlacedFeature);
++        BiomeModifications.addFeature(BiomeSelectors.foundInOverworld(), GenerationStep.Feature.UNDERGROUND_ORES, RegistryKey.of(Registry.PLACED_FEATURE_KEY, new Identifier(ConstantString.MOD_ID, ConstantString.RED_IRON_ORE)));
+     }
+ 
+ }
+Index: src/main/java/net/attribute/velociraptor/util/RandomUtil.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package net.attribute.velociraptor.util;\r\n\r\nimport net.attribute.velociraptor.AttributeStat;\r\n\r\nimport java.util.Random;\r\n\r\n/**\r\n * @author warren\r\n */\r\npublic class RandomUtil {\r\n    public static boolean getRandomNumber(int level, int weight) {\r\n        if (weight <= 10) {\r\n            weight = 10;\r\n        }\r\n        Random random = new Random();\r\n        int number = random.nextInt(weight);\r\n        AttributeStat.LOGGER.info(\"本次随机数为：{}\", number);\r\n        return number < level;\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/net/attribute/velociraptor/util/RandomUtil.java b/src/main/java/net/attribute/velociraptor/util/RandomUtil.java
+--- a/src/main/java/net/attribute/velociraptor/util/RandomUtil.java	(revision 3097d617362fb110c763711b0ef0c81f6bfda34c)
++++ b/src/main/java/net/attribute/velociraptor/util/RandomUtil.java	(date 1639206737151)
+@@ -1,6 +1,6 @@
+ package net.attribute.velociraptor.util;
+ 
+-import net.attribute.velociraptor.AttributeStat;
++import net.attribute.velociraptor.Velociraptors;
+ 
+ import java.util.Random;
+ 
+@@ -14,7 +14,7 @@
+         }
+         Random random = new Random();
+         int number = random.nextInt(weight);
+-        AttributeStat.LOGGER.info("本次随机数为：{}", number);
++        Velociraptors.LOGGER.info("本次随机数为：{}", number);
+         return number < level;
+     }
+ }
+Index: src/main/java/net/attribute/velociraptor/network/PlayerAttributeClientPacket.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package net.attribute.velociraptor.network;\r\n\r\nimport net.attribute.velociraptor.AttributeStat;\r\nimport net.attribute.velociraptor.util.LineNumberUtil;\r\nimport net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;\r\nimport net.minecraft.entity.attribute.EntityAttributeInstance;\r\nimport net.minecraft.entity.attribute.EntityAttributes;\r\nimport org.apache.commons.lang3.StringUtils;\r\n\r\n/**\r\n * @author hwl\r\n * @function\r\n * @createDate 2021/12/1 19:11\r\n * @updateDate 2021/12/1 19:11\r\n * @updateAuthor\r\n * @describe\r\n */\r\npublic class PlayerAttributeClientPacket {\r\n\r\n    public static void initialize() {\r\n        AttributeStat.LOGGER.info(\"Initialize player attribute client packet success!\");\r\n        ClientPlayNetworking.registerGlobalReceiver(PlayerAttributeServerPacket.VELOCIRAPTOR_ATTR_EXPERIENCE_INSTANCE, (client, handler, buf, responseSender) -> {\r\n            AttributeStat.LOGGER.info(\"register global receiver success\");\r\n            AttributeStat.LOGGER.info(\"Level instance executed!\");\r\n            if (buf == null) {\r\n                AttributeStat.LOGGER.warn(\"No buf send in this packet! {}\", LineNumberUtil.exceptionThrowLineNumber());\r\n            } else {\r\n                int value = buf.readInt();\r\n                String topic = buf.readString();\r\n                if (client.player == null) {\r\n                    AttributeStat.LOGGER.error(\"Player is null\");\r\n                } else {\r\n                    AttributeStat.LOGGER.info(\"Set player health success\");\r\n                    EntityAttributeInstance playerAttributeInstance = client.player.getAttributeInstance(EntityAttributes.GENERIC_MAX_HEALTH);\r\n                    if (playerAttributeInstance == null) {\r\n                        AttributeStat.LOGGER.error(\"No player attribute in this instance! {}\", LineNumberUtil.exceptionThrowLineNumber());\r\n                    } else {\r\n                        if (StringUtils.equals(topic, \"health\")) {\r\n                            double maxHealth = playerAttributeInstance.getBaseValue() + value;\r\n                            AttributeStat.LOGGER.info(\"client max health = {}\", maxHealth);\r\n                            playerAttributeInstance.setBaseValue(maxHealth);\r\n                        }\r\n                    }\r\n                }\r\n            }\r\n        });\r\n    }\r\n\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/net/attribute/velociraptor/network/PlayerAttributeClientPacket.java b/src/main/java/net/attribute/velociraptor/network/PlayerAttributeClientPacket.java
+--- a/src/main/java/net/attribute/velociraptor/network/PlayerAttributeClientPacket.java	(revision 3097d617362fb110c763711b0ef0c81f6bfda34c)
++++ b/src/main/java/net/attribute/velociraptor/network/PlayerAttributeClientPacket.java	(date 1639206737133)
+@@ -1,6 +1,6 @@
+ package net.attribute.velociraptor.network;
+ 
+-import net.attribute.velociraptor.AttributeStat;
++import net.attribute.velociraptor.Velociraptors;
+ import net.attribute.velociraptor.util.LineNumberUtil;
+ import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
+ import net.minecraft.entity.attribute.EntityAttributeInstance;
+@@ -8,7 +8,7 @@
+ import org.apache.commons.lang3.StringUtils;
+ 
+ /**
+- * @author hwl
++ * @author warren
+  * @function
+  * @createDate 2021/12/1 19:11
+  * @updateDate 2021/12/1 19:11
+@@ -18,26 +18,26 @@
+ public class PlayerAttributeClientPacket {
+ 
+     public static void initialize() {
+-        AttributeStat.LOGGER.info("Initialize player attribute client packet success!");
++        Velociraptors.LOGGER.info("Initialize player attribute client packet success!");
+         ClientPlayNetworking.registerGlobalReceiver(PlayerAttributeServerPacket.VELOCIRAPTOR_ATTR_EXPERIENCE_INSTANCE, (client, handler, buf, responseSender) -> {
+-            AttributeStat.LOGGER.info("register global receiver success");
+-            AttributeStat.LOGGER.info("Level instance executed!");
++            Velociraptors.LOGGER.info("register global receiver success");
++            Velociraptors.LOGGER.info("Level instance executed!");
+             if (buf == null) {
+-                AttributeStat.LOGGER.warn("No buf send in this packet! {}", LineNumberUtil.exceptionThrowLineNumber());
++                Velociraptors.LOGGER.warn("No buf send in this packet! {}", LineNumberUtil.exceptionThrowLineNumber());
+             } else {
+                 int value = buf.readInt();
+                 String topic = buf.readString();
+                 if (client.player == null) {
+-                    AttributeStat.LOGGER.error("Player is null");
++                    Velociraptors.LOGGER.error("Player is null");
+                 } else {
+-                    AttributeStat.LOGGER.info("Set player health success");
++                    Velociraptors.LOGGER.info("Set player health success");
+                     EntityAttributeInstance playerAttributeInstance = client.player.getAttributeInstance(EntityAttributes.GENERIC_MAX_HEALTH);
+                     if (playerAttributeInstance == null) {
+-                        AttributeStat.LOGGER.error("No player attribute in this instance! {}", LineNumberUtil.exceptionThrowLineNumber());
++                        Velociraptors.LOGGER.error("No player attribute in this instance! {}", LineNumberUtil.exceptionThrowLineNumber());
+                     } else {
+                         if (StringUtils.equals(topic, "health")) {
+                             double maxHealth = playerAttributeInstance.getBaseValue() + value;
+-                            AttributeStat.LOGGER.info("client max health = {}", maxHealth);
++                            Velociraptors.LOGGER.info("client max health = {}", maxHealth);
+                             playerAttributeInstance.setBaseValue(maxHealth);
+                         }
+                     }
+Index: src/main/java/net/attribute/velociraptor/network/PlayerAttributeServerPacket.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package net.attribute.velociraptor.network;\r\n\r\nimport net.attribute.velociraptor.AttributeStat;\r\nimport net.attribute.velociraptor.util.LineNumberUtil;\r\nimport net.fabricmc.fabric.api.networking.v1.PacketByteBufs;\r\nimport net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;\r\nimport net.minecraft.entity.attribute.EntityAttributeInstance;\r\nimport net.minecraft.entity.attribute.EntityAttributes;\r\nimport net.minecraft.network.PacketByteBuf;\r\nimport net.minecraft.network.packet.s2c.play.CustomPayloadS2CPacket;\r\nimport net.minecraft.util.Identifier;\r\nimport org.apache.commons.lang3.StringUtils;\r\n\r\n/**\r\n * @author hwl\r\n * @function\r\n * @createDate 2021/12/1 17:30\r\n * @updateDate 2021/12/1 17:30\r\n * @updateAuthor\r\n * @describe\r\n */\r\npublic class PlayerAttributeServerPacket {\r\n\r\n    public static final Identifier VELOCIRAPTOR_ATTR_LEVEL_INSTANCE = new Identifier(\"attribute\", \"velociraptor_attr_level_instance\");\r\n    public static final Identifier VELOCIRAPTOR_ATTR_EXPERIENCE_INSTANCE = new Identifier(\"attribute\", \"velociraptor_attr_experience_instance\");\r\n\r\n    public static void initialize() {\r\n        AttributeStat.LOGGER.info(\"Player attribute server packet initialize success!\");\r\n        ServerPlayNetworking.registerGlobalReceiver(VELOCIRAPTOR_ATTR_LEVEL_INSTANCE, (server, player, handler, buf, responseSender) -> {\r\n            if (server == null) {\r\n                AttributeStat.LOGGER.error(\"No server in this instance！ {}\", LineNumberUtil.exceptionThrowLineNumber());\r\n            } else {\r\n                if (player == null) {\r\n                    AttributeStat.LOGGER.error(\"Player is null! {}\", LineNumberUtil.exceptionThrowLineNumber());\r\n                } else {\r\n                    String topic = buf.readString();\r\n                    int value = buf.readInt();\r\n                    AttributeStat.LOGGER.info(\"Player attribute server packet initialize success, uuid = {},  name = {}\", player.getUuidAsString(), player.getName().getString());\r\n                    AttributeStat.LOGGER.info(\"topic is {}, and the value is {}\", topic, value);\r\n                    if (server.isSingleplayer()) {\r\n                        EntityAttributeInstance playerAttribute = player.getAttributeInstance(EntityAttributes.GENERIC_MAX_HEALTH);\r\n                        if (playerAttribute == null) {\r\n                            AttributeStat.LOGGER.error(\"No player attribute in this instance! {}\", LineNumberUtil.exceptionThrowLineNumber());\r\n                        } else {\r\n                            if (StringUtils.equals(\"health\", topic)) {\r\n                                double maxHealth = playerAttribute.getBaseValue() + value;\r\n                                AttributeStat.LOGGER.info(\"server max health = {}\", maxHealth);\r\n                                playerAttribute.setBaseValue(maxHealth);\r\n                            }\r\n                        }\r\n                        PacketByteBuf packetByteBuf = PacketByteBufs.create();\r\n                        packetByteBuf.writeInt(value);\r\n                        packetByteBuf.writeString(topic);\r\n                        CustomPayloadS2CPacket customPayloadS2CPacket = new CustomPayloadS2CPacket(PlayerAttributeServerPacket.VELOCIRAPTOR_ATTR_EXPERIENCE_INSTANCE, packetByteBuf);\r\n                        player.networkHandler.sendPacket(customPayloadS2CPacket);\r\n                    } else {\r\n                        AttributeStat.LOGGER.info(\"Now playing in multi player mode!\");\r\n                    }\r\n                }\r\n            }\r\n        });\r\n    }\r\n\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/net/attribute/velociraptor/network/PlayerAttributeServerPacket.java b/src/main/java/net/attribute/velociraptor/network/PlayerAttributeServerPacket.java
+--- a/src/main/java/net/attribute/velociraptor/network/PlayerAttributeServerPacket.java	(revision 3097d617362fb110c763711b0ef0c81f6bfda34c)
++++ b/src/main/java/net/attribute/velociraptor/network/PlayerAttributeServerPacket.java	(date 1639206737133)
+@@ -1,6 +1,6 @@
+ package net.attribute.velociraptor.network;
+ 
+-import net.attribute.velociraptor.AttributeStat;
++import net.attribute.velociraptor.Velociraptors;
+ import net.attribute.velociraptor.util.LineNumberUtil;
+ import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
+ import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
+@@ -12,7 +12,7 @@
+ import org.apache.commons.lang3.StringUtils;
+ 
+ /**
+- * @author hwl
++ * @author warren
+  * @function
+  * @createDate 2021/12/1 17:30
+  * @updateDate 2021/12/1 17:30
+@@ -21,30 +21,30 @@
+  */
+ public class PlayerAttributeServerPacket {
+ 
+-    public static final Identifier VELOCIRAPTOR_ATTR_LEVEL_INSTANCE = new Identifier("attribute", "velociraptor_attr_level_instance");
+-    public static final Identifier VELOCIRAPTOR_ATTR_EXPERIENCE_INSTANCE = new Identifier("attribute", "velociraptor_attr_experience_instance");
++    public static final Identifier VELOCIRAPTOR_ATTR_LEVEL_INSTANCE = new Identifier("velociraptors", "velociraptor_attr_level_instance");
++    public static final Identifier VELOCIRAPTOR_ATTR_EXPERIENCE_INSTANCE = new Identifier("velociraptors", "velociraptor_attr_experience_instance");
+ 
+     public static void initialize() {
+-        AttributeStat.LOGGER.info("Player attribute server packet initialize success!");
++        Velociraptors.LOGGER.info("Player attribute server packet initialize success!");
+         ServerPlayNetworking.registerGlobalReceiver(VELOCIRAPTOR_ATTR_LEVEL_INSTANCE, (server, player, handler, buf, responseSender) -> {
+             if (server == null) {
+-                AttributeStat.LOGGER.error("No server in this instance！ {}", LineNumberUtil.exceptionThrowLineNumber());
++                Velociraptors.LOGGER.error("No server in this instance！ {}", LineNumberUtil.exceptionThrowLineNumber());
+             } else {
+                 if (player == null) {
+-                    AttributeStat.LOGGER.error("Player is null! {}", LineNumberUtil.exceptionThrowLineNumber());
++                    Velociraptors.LOGGER.error("Player is null! {}", LineNumberUtil.exceptionThrowLineNumber());
+                 } else {
+                     String topic = buf.readString();
+                     int value = buf.readInt();
+-                    AttributeStat.LOGGER.info("Player attribute server packet initialize success, uuid = {},  name = {}", player.getUuidAsString(), player.getName().getString());
+-                    AttributeStat.LOGGER.info("topic is {}, and the value is {}", topic, value);
++                    Velociraptors.LOGGER.info("Player attribute server packet initialize success, uuid = {},  name = {}", player.getUuidAsString(), player.getName().getString());
++                    Velociraptors.LOGGER.info("topic is {}, and the value is {}", topic, value);
+                     if (server.isSingleplayer()) {
+                         EntityAttributeInstance playerAttribute = player.getAttributeInstance(EntityAttributes.GENERIC_MAX_HEALTH);
+                         if (playerAttribute == null) {
+-                            AttributeStat.LOGGER.error("No player attribute in this instance! {}", LineNumberUtil.exceptionThrowLineNumber());
++                            Velociraptors.LOGGER.error("No player attribute in this instance! {}", LineNumberUtil.exceptionThrowLineNumber());
+                         } else {
+                             if (StringUtils.equals("health", topic)) {
+                                 double maxHealth = playerAttribute.getBaseValue() + value;
+-                                AttributeStat.LOGGER.info("server max health = {}", maxHealth);
++                                Velociraptors.LOGGER.info("server max health = {}", maxHealth);
+                                 playerAttribute.setBaseValue(maxHealth);
+                             }
+                         }
+@@ -54,7 +54,7 @@
+                         CustomPayloadS2CPacket customPayloadS2CPacket = new CustomPayloadS2CPacket(PlayerAttributeServerPacket.VELOCIRAPTOR_ATTR_EXPERIENCE_INSTANCE, packetByteBuf);
+                         player.networkHandler.sendPacket(customPayloadS2CPacket);
+                     } else {
+-                        AttributeStat.LOGGER.info("Now playing in multi player mode!");
++                        Velociraptors.LOGGER.info("Now playing in multi player mode!");
+                     }
+                 }
+             }
+Index: src/main/java/net/attribute/velociraptor/ore/RedIronOre.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package net.attribute.velociraptor.ore;\r\n\r\nimport net.minecraft.block.Block;\r\n\r\npublic class RedIronOre extends Block {\r\n\r\n    public RedIronOre(Settings settings) {\r\n        super(settings);\r\n    }\r\n\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/net/attribute/velociraptor/ore/RedIronOre.java b/src/main/java/net/attribute/velociraptor/ore/RedIronOre.java
+--- a/src/main/java/net/attribute/velociraptor/ore/RedIronOre.java	(revision 3097d617362fb110c763711b0ef0c81f6bfda34c)
++++ b/src/main/java/net/attribute/velociraptor/ore/RedIronOre.java	(date 1639206737134)
+@@ -8,4 +8,6 @@
+         super(settings);
+     }
+ 
++
++
+ }
+Index: src/main/java/net/attribute/velociraptor/item/armor/boot/DiamondNetheriteBoot.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package net.attribute.velociraptor.item.armor.boot;\r\n\r\nimport net.attribute.velociraptor.item.materials.NetheriteMaterials;\r\nimport net.minecraft.entity.EquipmentSlot;\r\nimport net.minecraft.item.ArmorItem;\r\n\r\n/**\r\n * @author hwl\r\n * @function\r\n * @createDate 2021/12/3 9:38\r\n * @updateDate 2021/12/3 9:38\r\n * @updateAuthor\r\n * @describe\r\n */\r\n\r\npublic class DiamondNetheriteBoot extends ArmorItem {\r\n    public DiamondNetheriteBoot(Settings settings) {\r\n        super(NetheriteMaterials.DIAMOND_NETHERITE, EquipmentSlot.FEET, settings);\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/net/attribute/velociraptor/item/armor/boot/DiamondNetheriteBoot.java b/src/main/java/net/attribute/velociraptor/item/armor/boot/DiamondNetheriteBoot.java
+--- a/src/main/java/net/attribute/velociraptor/item/armor/boot/DiamondNetheriteBoot.java	(revision 3097d617362fb110c763711b0ef0c81f6bfda34c)
++++ b/src/main/java/net/attribute/velociraptor/item/armor/boot/DiamondNetheriteBoot.java	(date 1639206737096)
+@@ -5,7 +5,7 @@
+ import net.minecraft.item.ArmorItem;
+ 
+ /**
+- * @author hwl
++ * @author warren
+  * @function
+  * @createDate 2021/12/3 9:38
+  * @updateDate 2021/12/3 9:38
+Index: src/main/resources/fabric.mod.json
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>{\r\n  \"schemaVersion\": 1,\r\n  \"id\": \"velociraptor-attribute-stat\",\r\n  \"version\": \"${version}\",\r\n\r\n  \"name\": \"Attribute Stat\",\r\n  \"description\": \"Rise up your level, make you more stronger\",\r\n  \"authors\": [\r\n    \"Velociraptor\"\r\n  ],\r\n  \"contact\": {\r\n    \"homepage\": \"https://fabricmc.net/\",\r\n    \"sources\": \"https://github.com/FabricMC/fabric-example-mod\"\r\n  },\r\n\r\n  \"license\": \"CC0-1.0\",\r\n  \"icon\": \"assets/attribute/icon.png\",\r\n\r\n  \"environment\": \"*\",\r\n  \"entrypoints\": {\r\n    \"main\": [\r\n        \"net.attribute.velociraptor.AttributeStat\"\r\n    ]\r\n  },\r\n  \"mixins\": [\r\n    \"velociraptor.mixins.json\"\r\n  ],\r\n\r\n  \"depends\": {\r\n    \"fabricloader\": \">=0.11.3\",\r\n    \"fabric\": \"*\",\r\n    \"minecraft\": \"1.18.x\",\r\n    \"java\": \">=17\"\r\n  },\r\n  \"suggests\": {\r\n    \"another-mod\": \"*\"\r\n  }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/resources/fabric.mod.json b/src/main/resources/fabric.mod.json
+--- a/src/main/resources/fabric.mod.json	(revision 3097d617362fb110c763711b0ef0c81f6bfda34c)
++++ b/src/main/resources/fabric.mod.json	(date 1639206737184)
+@@ -1,38 +1,34 @@
+ {
+-  "schemaVersion": 1,
+-  "id": "velociraptor-attribute-stat",
+-  "version": "${version}",
+-
+-  "name": "Attribute Stat",
+-  "description": "Rise up your level, make you more stronger",
+-  "authors": [
+-    "Velociraptor"
+-  ],
+-  "contact": {
+-    "homepage": "https://fabricmc.net/",
+-    "sources": "https://github.com/FabricMC/fabric-example-mod"
+-  },
+-
+-  "license": "CC0-1.0",
+-  "icon": "assets/attribute/icon.png",
+-
+-  "environment": "*",
+-  "entrypoints": {
+-    "main": [
+-        "net.attribute.velociraptor.AttributeStat"
+-    ]
+-  },
+-  "mixins": [
+-    "velociraptor.mixins.json"
+-  ],
+-
+-  "depends": {
+-    "fabricloader": ">=0.11.3",
+-    "fabric": "*",
+-    "minecraft": "1.18.x",
+-    "java": ">=17"
+-  },
+-  "suggests": {
+-    "another-mod": "*"
+-  }
++    "schemaVersion": 1,
++    "id": "velociraptor-attribute-stat",
++    "version": "${version}",
++    "name": "Attribute Stat",
++    "description": "Rise up your level, make you more stronger",
++    "authors": [
++        "Velociraptor"
++    ],
++    "contact": {
++        "homepage": "https://fabricmc.net/",
++        "sources": "https://github.com/FabricMC/fabric-example-mod"
++    },
++    "license": "CC0-1.0",
++    "icon": "assets/velociraptors/icon.png",
++    "environment": "*",
++    "entrypoints": {
++        "main": [
++            "net.attribute.velociraptor.Velociraptors"
++        ]
++    },
++    "mixins": [
++        "velociraptor.mixins.json"
++    ],
++    "depends": {
++        "fabricloader": ">=0.11.3",
++        "fabric": "*",
++        "minecraft": "1.18.x",
++        "java": ">=17"
++    },
++    "suggests": {
++        "another-mod": "*"
++    }
+ }
